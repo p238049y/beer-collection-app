@@ -1,6 +1,6 @@
 import 'package:beer_collection/util/app_info_first.dart';
 import 'package:beer_collection/util/app_styles.dart';
-import 'package:beer_collection/view/BeerScreen/beer_screen.dart';
+import 'package:beer_collection/view/HomePage/BeerScreen/beer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
