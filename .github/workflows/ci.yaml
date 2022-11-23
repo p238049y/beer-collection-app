@@ -1,0 +1,33 @@
+name: flutter CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: チェックアウト
+        uses: actions/checkout@v3
+      
+      # https://github.com/subosito/flutter-action
+      - name: CIジョブを動かすためのflutterの環境構築
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.0.2'
+          channel: 'stable'
+
+      - name: 正常にインストールできているかを確認
+        run: flutter --version
+
+      - name: パッケージのインストール
+        run: flutter pub get
+
+      - name: テスト実行
+        run: flutter test 
