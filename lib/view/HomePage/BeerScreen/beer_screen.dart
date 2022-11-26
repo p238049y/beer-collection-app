@@ -2,6 +2,7 @@ import 'package:beer_collection/util/app_layout.dart';
 import 'package:beer_collection/util/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 
 class BeerScreen extends StatelessWidget {
   final Map<String, dynamic> beer;
@@ -54,6 +55,12 @@ class BeerScreen extends StatelessWidget {
           Text(
             '${beer['avb']}%',
             style:  Styles.headLineStyle1.copyWith(color: Styles.kakiColor),
+          ),
+          Text(
+            // ignore: todo
+            //TODO:登録した日付を出す(https://github.com/p238049y/beer-collection-app/issues/8)
+            '2022/11/20',
+            style:  Styles.headLineStyle2.copyWith(color: Styles.kakiColor),
           ),
         ]
       ),
