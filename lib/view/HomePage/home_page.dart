@@ -4,6 +4,7 @@ import 'package:beer_collection/view/HomePage/BeerScreen/beer_screen.dart';
 import 'package:beer_collection/view/HomePage/SummaryScreen/summary_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'BeerRecordAddPage/beer_record_add_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -75,6 +76,20 @@ class HomePage extends StatelessWidget {
           const SummaryScreen(),  
         ],
       ),
+      floatingActionButton: Column(
+        verticalDirection: VerticalDirection.up, // childrenの先頭を下に配置
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          FloatingActionButton(
+            heroTag: 'beerRecordAdd',
+            backgroundColor: Colors.blue[500],
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const BeerRecordAddPage())
+              );
+            },
+            child: const Icon(Icons.add),
+          ),
         ],
       ),
     );
