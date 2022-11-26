@@ -1,5 +1,7 @@
 import 'package:beer_collection/util/app_info_first.dart';
 import 'package:beer_collection/util/app_styles.dart';
+import 'package:beer_collection/view/HealthPage/health_page.dart';
+import 'package:beer_collection/view/HomePage/BeerList/beer_list.dart';
 import 'package:beer_collection/view/HomePage/BeerScreen/beer_screen.dart';
 import 'package:beer_collection/view/HomePage/SummaryScreen/summary_screen.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +29,9 @@ class HomePage extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    print("You are tapped \"View all\"");
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const BeerList())
+                    );
                   },
                   child: Text(
                     "View all > ",
@@ -38,14 +42,13 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-          const Gap(15),
+          const Gap(8),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.only(left: 20),
             child: Row(
               children: beerList.map((beer) => BeerScreen(beer: beer)).toList(),
             )
-          )
           ),
           const Gap(15),
           Container(
