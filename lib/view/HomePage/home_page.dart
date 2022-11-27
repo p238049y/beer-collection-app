@@ -1,7 +1,7 @@
 import 'package:beer_collection/util/app_info_first.dart';
 import 'package:beer_collection/util/app_styles.dart';
 import 'package:beer_collection/view/HealthPage/health_page.dart';
-import 'package:beer_collection/view/HomePage/BeerList/beer_list.dart';
+import 'package:beer_collection/view/HomePage/BeerListPage/beer_list_page.dart';
 import 'package:beer_collection/view/HomePage/BeerScreen/beer_screen.dart';
 import 'package:beer_collection/view/HomePage/SummaryScreen/summary_screen.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => const BeerList())
+                      MaterialPageRoute(builder: (context) => const BeerListPage())
                     );
                   },
                   child: Text(
