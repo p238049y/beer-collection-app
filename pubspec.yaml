@@ -38,6 +38,9 @@ dependencies:
   get:
   gap: ^2.0.0
 
+  # 画像ライブラリから画像を選択、もしくはカメラで新しい写真を撮るため
+  image_picker: ^0.8.6
+
 
 
 dev_dependencies:
