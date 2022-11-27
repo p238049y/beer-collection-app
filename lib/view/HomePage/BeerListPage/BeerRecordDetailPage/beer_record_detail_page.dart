@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
-class BeerList extends StatelessWidget {
-  const BeerList({Key? key}) : super(key: key);
-  
+class BeerRecordDetailPage extends StatefulWidget {
+  const BeerRecordDetailPage({Key? key}) : super(key: key);
+
+  @override
+  State<BeerRecordDetailPage> createState() => _BeerRecordDetailPageState();
+}
+
+class _BeerRecordDetailPageState extends State<BeerRecordDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
