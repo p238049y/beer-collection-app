@@ -41,6 +41,9 @@ dependencies:
   # 画像ライブラリから画像を選択、もしくはカメラで新しい写真を撮るため
   image_picker: ^0.8.6
 
+ # セレクトボックスを使うため
+  bs_flutter_selectbox: ^1.3.0
+
 
 
 dev_dependencies:
