@@ -68,7 +68,7 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
                 color: Colors.blueGrey[100],
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Icon(Icons.camera_alt_outlined,  size: 200,),
+              child: const Icon(Icons.photo, size: 200,),
             )
             : Image.file(
                 File(_image!.path),
