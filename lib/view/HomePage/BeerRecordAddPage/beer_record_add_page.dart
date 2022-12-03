@@ -144,6 +144,13 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
             heroTag: 'gallery',
             onPressed: getImageFromGalley,
             child: const Icon(Icons.photo_album)
+          ),
+          FloatingActionButton(
+            heroTag: 'register',
+            onPressed: () => {
+              Navigator.of(context).pop(),
+            },
+            child: const Icon(Icons.add_task)
           )
         ]
       )
