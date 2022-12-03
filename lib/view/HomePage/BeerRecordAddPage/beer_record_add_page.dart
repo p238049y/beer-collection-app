@@ -6,6 +6,7 @@ import 'package:bs_flutter_selectbox/bs_flutter_selectbox.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:beer_collection/widgets/common_back_button_widget.dart';
 
 class BeerRecordAddPage extends StatefulWidget {
   const BeerRecordAddPage({Key? key}) : super(key: key);
@@ -39,22 +40,7 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leadingWidth: 80,
-        leading:  TextButton(
-          child: Text(
-          '< back',
-          style: TextStyle(
-            color: Styles.primaryColor,
-            fontWeight: FontWeight.bold, 
-            fontSize: 15.0
-          ),  
-        ),
-        onPressed: () => Navigator.of(context).pop(),
-        )
-      ),
+      appBar: const CommonBackButton(),
       body : Padding(
         padding: const EdgeInsets.only(right: 16.0, left: 16.0),
         child: Column(
@@ -87,7 +73,7 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
             ),
             onChanged: (String value) {
               // setState(() {
-              //   displayData.text = value;
+              //   TODO: 保存のための値をセットする;
               // });
             },
           ),
@@ -107,7 +93,7 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
             ),
             onChanged: (String value) {
               // setState(() {
-              //   displayData.text = value;
+              //   TODO: 保存のための値をセットする;
               // });
             },
           ),
