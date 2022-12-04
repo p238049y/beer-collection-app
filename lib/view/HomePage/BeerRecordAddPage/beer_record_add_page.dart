@@ -41,105 +41,125 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CommonBackButton(),
-      body : Padding(
-        padding: const EdgeInsets.only(right: 16.0, left: 16.0),
-        child: Column(
-        children: [
-          Center(
-            child: _image == null 
-            ? Container(
-              width: 350,
-              height: 250,
-              decoration: BoxDecoration(
-                color: Colors.blueGrey[100],
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: const Icon(Icons.photo, size: 200,),
-            )
-            : Image.file(
-                File(_image!.path),
-                width: 350,
-                height: 250
-              )
-          ),
-          const Gap(16),
-          TextFormField(
-            decoration: const InputDecoration(
-              labelText: 'ビール名',
-              labelStyle: TextStyle(
-                fontSize: 20,
-              ),
-              border: OutlineInputBorder()
+      body: Padding(
+          padding: const EdgeInsets.only(right: 16.0, left: 16.0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Center(
+                    child: _image == null
+                        ? Container(
+                            width: 350,
+                            height: 250,
+                            decoration: BoxDecoration(
+                              color: Colors.blueGrey[100],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const Icon(
+                              Icons.photo,
+                              size: 200,
+                            ),
+                          )
+                        : Image.file(File(_image!.path),
+                            width: 350, height: 250)),
+                const Gap(16),
+                TextFormField(
+                  decoration: const InputDecoration(
+                      labelText: 'ビール名',
+                      labelStyle: TextStyle(
+                        fontSize: 20,
+                      ),
+                      border: OutlineInputBorder()),
+                  onChanged: (String value) {
+                    // setState(() {
+                    //   TODO: 保存のための値をセットする;
+                    // });
+                  },
+                ),
+                const Gap(16),
+                BsSelectBox(
+                  hintText: 'スタイル',
+                  controller: beerStyleList,
+                ),
+                const Gap(16),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'アルコール度数',
+                    labelStyle: TextStyle(
+                      fontSize: 20,
+                    ),
+                    border: OutlineInputBorder(),
+                  ),
+                  onChanged: (String value) {
+                    // setState(() {
+                    //   TODO: 保存のための値をセットする;
+                    // });
+                  },
+                ),
+                const Gap(16),
+                TextFormField(
+                  decoration: const InputDecoration(
+                      labelText: 'カロリー',
+                      labelStyle: TextStyle(
+                        fontSize: 20,
+                      ),
+                      border: OutlineInputBorder()),
+                  onChanged: (String value) {
+                    // setState(() {
+                    //   displayData.text = value;
+                    // });
+                  },
+                ),
+                const Gap(24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Ink(
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.blue,
+                      ),
+                      padding: const EdgeInsets.all(10.0),
+                      child: IconButton(
+                        icon: const Icon(Icons.photo_camera),
+                        onPressed: getImageFromCamera,
+                        iconSize: 32.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Ink(
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.blue,
+                      ),
+                      padding: const EdgeInsets.all(10.0),
+                      child: IconButton(
+                        icon: const Icon(Icons.photo_album),
+                        onPressed: getImageFromGalley,
+                        iconSize: 32.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Ink(
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.blue,
+                      ),
+                      padding: const EdgeInsets.all(10.0),
+                      child: IconButton(
+                        icon: const Icon(Icons.add_task),
+                        onPressed: () => {
+                        Navigator.of(context).pop(),
+                      },
+                        iconSize: 32.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                )
+              ],
             ),
-            onChanged: (String value) {
-              // setState(() {
-              //   TODO: 保存のための値をセットする;
-              // });
-            },
-          ),
-          const Gap(16),
-          BsSelectBox(
-            hintText: 'スタイル',
-            controller: beerStyleList,
-          ),
-          const Gap(16),
-          TextFormField(
-            decoration: const InputDecoration(
-              labelText: 'アルコール度数',
-              labelStyle: TextStyle(
-                fontSize: 20,
-              ),
-              border: OutlineInputBorder(),
-            ),
-            onChanged: (String value) {
-              // setState(() {
-              //   TODO: 保存のための値をセットする;
-              // });
-            },
-          ),
-          const Gap(16),
-          TextFormField(
-            decoration: const InputDecoration(
-              labelText: 'カロリー',
-              labelStyle: TextStyle(
-                fontSize: 20,
-              ),
-              border: OutlineInputBorder()
-            ),
-            onChanged: (String value) {
-              // setState(() {
-              //   displayData.text = value;
-              // });
-            },
-          ),
-        ],
-      ),  
-      ),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
-        children: [
-          // カメラから取得するボタン
-          FloatingActionButton(
-            heroTag: 'camera',
-            onPressed: getImageFromCamera,
-            child: const Icon(Icons.photo_camera)
-
-          ),
-          // ギャラリーから取得するボタン
-          FloatingActionButton(
-            heroTag: 'gallery',
-            onPressed: getImageFromGalley,
-            child: const Icon(Icons.photo_album)
-          ),
-          FloatingActionButton(
-            heroTag: 'register',
-            onPressed: () => {
-              Navigator.of(context).pop(),
-            },
-            child: const Icon(Icons.add_task)
-          )
-        ]
-      )
+          )),
     );
   }
 }
