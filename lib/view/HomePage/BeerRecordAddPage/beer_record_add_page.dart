@@ -70,6 +70,74 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
                 fontSize: 20,
               ),
               border: OutlineInputBorder()
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Center(
+                    child: _image == null
+                        ? Container(
+                            width: 350,
+                            height: 250,
+                            decoration: BoxDecoration(
+                              color: Colors.blueGrey[100],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const Icon(
+                              Icons.photo,
+                              size: 200,
+                            ),
+                          )
+                        : Image.file(File(_image!.path),
+                            width: 350, height: 250)),
+                const Gap(16),
+                TextFormField(
+                  decoration: const InputDecoration(
+                      labelText: 'ビール名',
+                      labelStyle: TextStyle(
+                        fontSize: 20,
+                      ),
+                      border: OutlineInputBorder()),
+                  onChanged: (String value) {
+                    // setState(() {
+                    //   TODO: 保存のための値をセットする;
+                    // });
+                  },
+                ),
+                const Gap(16),
+                BsSelectBox(
+                  hintText: 'スタイル',
+                  controller: beerStyleList,
+                ),
+                const Gap(16),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'アルコール度数',
+                    labelStyle: TextStyle(
+                      fontSize: 20,
+                    ),
+                    border: OutlineInputBorder(),
+                  ),
+                  onChanged: (String value) {
+                    // setState(() {
+                    //   TODO: 保存のための値をセットする;
+                    // });
+                  },
+                ),
+                const Gap(16),
+                TextFormField(
+                  decoration: const InputDecoration(
+                      labelText: 'カロリー',
+                      labelStyle: TextStyle(
+                        fontSize: 20,
+                      ),
+                      border: OutlineInputBorder()),
+                  onChanged: (String value) {
+                    // setState(() {
+                    //   displayData.text = value;
+                    // });
+                  },
+                ),
+                const Gap(24),
             ),
             onChanged: (String value) {
               // setState(() {
