@@ -1,4 +1,5 @@
 import 'package:beer_collection/widgets/common_back_button_widget.dart';
+import 'package:beer_collection/widgets/list_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -24,57 +25,13 @@ class _BeerRecordDetailPageState extends State<BeerRecordDetailPage> {
             child: Image.asset('assets/images/tokyo_white.png')
           ),
           const Gap(16),
-          const TextField(
-            enabled: false,
-            decoration: InputDecoration(
-              labelText: 'ビール名：東京ホワイト',
-              labelStyle: TextStyle(
-                fontSize: 20,
-                color: Colors.blueGrey,
-                fontWeight: FontWeight.bold,
-              ),
-              border: OutlineInputBorder()
-            ),
-          ),
+          const ListItem(isEnabled: false, title: 'ビール名', name: '東京ホワイト'),
           const Gap(16),
-          const TextField(
-            enabled: false,
-            decoration: InputDecoration(
-              labelText: 'ビアスタイル：セゾン',
-              labelStyle: TextStyle(
-                fontSize: 20,
-                color: Colors.blueGrey,
-                fontWeight: FontWeight.bold,
-              ),
-              border: OutlineInputBorder()
-            ),
-          ),
+          const ListItem(isEnabled: false, title: 'ビアスタイル', name: 'セゾン'),
           const Gap(16),
-          const TextField(
-            enabled: false,
-            decoration: InputDecoration(
-              labelText: 'アルコール度数：5.0%',
-              labelStyle: TextStyle(
-                fontSize: 20,
-                color: Colors.blueGrey,
-                fontWeight: FontWeight.bold,
-              ),
-              border: OutlineInputBorder()
-            ),
-          ),
+          const ListItem(isEnabled: false, title: 'アルコール度数', name: '5.0', unit: '%'),
           const Gap(16),
-          const TextField(
-            enabled: false,
-            decoration: InputDecoration(
-              labelText: 'カロリー：350kcal',
-              labelStyle: TextStyle(
-                fontSize: 20,
-                color: Colors.blueGrey,
-                fontWeight: FontWeight.bold,
-              ),
-              border: OutlineInputBorder()
-            ),
-          ),
+          const ListItem(isEnabled: false, title: 'カロリー', name: '350', unit: 'kcal'),
         ],
       ),  
       ),
