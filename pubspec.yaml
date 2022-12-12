@@ -11,6 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  
+  flutter_localizations:
+    sdk: flutter
 
  # CupertinoIconsのアイコンを使うため
   cupertino_icons: ^1.0.2

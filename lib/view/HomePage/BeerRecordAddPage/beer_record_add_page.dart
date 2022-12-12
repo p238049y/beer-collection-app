@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:beer_collection/util/app_styles.dart';
 import 'package:beer_collection/util/beer_style_list.dart';
 import 'package:bs_flutter_selectbox/bs_flutter_selectbox.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +17,8 @@ class BeerRecordAddPage extends StatefulWidget {
 class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
   XFile? _image;
   final imagePicker = ImagePicker();
+  DateTime? _selectedDate;
+  final TextEditingController _textEditingController = TextEditingController();
 
   Future getImageFromCamera() async {
     final pickedFile = await imagePicker.pickImage(source: ImageSource.camera);
@@ -106,7 +107,25 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
                       border: OutlineInputBorder()),
                   onChanged: (String value) {
                     // setState(() {
-                    //   displayData.text = value;
+                    //   TODO: 保存のための値をセットする;
+                    // });
+                  },
+                ),
+                const Gap(24),
+                TextFormField(
+                  decoration: const InputDecoration(
+                      labelText: '日付',
+                      labelStyle: TextStyle(
+                        fontSize: 20,
+                      ),
+                      border: OutlineInputBorder()),
+                  controller: _textEditingController,
+                  onTap: () {
+                    _selectDate(context);
+                  },
+                  onChanged: (String value) {
+                    // setState(() {
+                    //   TODO: 保存のための値をセットする;
                     // });
                   },
                 ),
@@ -161,5 +180,20 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
             ),
           )),
     );
+  }
+
+  _selectDate(BuildContext context) async {
+    final newSelectedDate = await showDatePicker(
+      context: context,
+      locale: const Locale('ja'),
+      initialDate: _selectedDate ?? DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2040),
+    );
+
+    if (newSelectedDate != null) {
+      _selectedDate = newSelectedDate;
+      _textEditingController.text = _selectedDate.toString();
+    }
   }
 }
