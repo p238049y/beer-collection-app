@@ -107,7 +107,7 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
                       border: OutlineInputBorder()),
                   onChanged: (String value) {
                     // setState(() {
-                    //   displayData.text = value;
+                    //   TODO: 保存のための値をセットする;
                     // });
                   },
                 ),
@@ -125,7 +125,7 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
                   },
                   onChanged: (String value) {
                     // setState(() {
-                    //   displayData.text = value;
+                    //   TODO: 保存のための値をセットする;
                     // });
                   },
                 ),
@@ -185,6 +185,7 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
   _selectDate(BuildContext context) async {
     final newSelectedDate = await showDatePicker(
       context: context,
+      locale: const Locale('ja'),
       initialDate: _selectedDate ?? DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2040),
