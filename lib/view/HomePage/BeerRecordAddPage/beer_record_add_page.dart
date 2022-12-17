@@ -18,7 +18,6 @@ class BeerRecordAddPage extends StatefulWidget {
 class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
   XFile? _image;
   final imagePicker = ImagePicker();
-  DateTime _selectedDate = DateTime.now();
   final TextEditingController _textEditingController = TextEditingController();
   DateFormat outputFormat = DateFormat('yyyy/MM/dd');
 
@@ -163,7 +162,6 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
                   controller: _textEditingController,
                   onTap: () {
                     _selectDate(context);
-                    registryBeer.registryDateTime = outputFormat.format(_selectedDate);
                   },
                 ),
                 const Gap(10),
@@ -221,19 +219,21 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
   }
 
   _selectDate(BuildContext context) async {
+    DateTime selectedDate = DateTime.now();
     final DateTime? newSelectedDate = await showDatePicker(
       context: context,
       locale: const Locale('ja'),
-      initialDate: _selectedDate,
+      initialDate: selectedDate,
       firstDate: DateTime(2000),
       lastDate: DateTime(2040),
     );
 
-    if (newSelectedDate != null && newSelectedDate != _selectedDate) {
+    if (newSelectedDate != null && newSelectedDate != selectedDate) {
       setState(() {
-        _selectedDate = newSelectedDate;
+        selectedDate = newSelectedDate;
+        registryBeer.registryDateTime = outputFormat.format(newSelectedDate);
       });
     }
-    _textEditingController.text = _selectedDate.toString();
+    _textEditingController.text = outputFormat.format(selectedDate);
   }
 }
