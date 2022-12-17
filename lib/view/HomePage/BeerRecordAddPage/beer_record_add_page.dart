@@ -234,6 +234,6 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
         _selectedDate = newSelectedDate;
       });
     }
-    _textEditingController.text = _selectedDate.toString();
+    _textEditingController.text = outputFormat.format(_selectedDate);
   }
 }
