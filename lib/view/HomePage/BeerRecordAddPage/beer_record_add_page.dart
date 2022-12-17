@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:beer_collection/entities/beer.dart';
 import 'package:beer_collection/repository/beer/beer.dart';
 import 'package:beer_collection/util/beer_style_list.dart';
+import 'package:beer_collection/view/HomePage/BeerRecordAddPage/model.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
@@ -107,8 +108,8 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
                       child: DropdownButton(
                         value: registryBeer.beerStyle,
                         hint: const Padding(
-                            padding: EdgeInsets.only(left: 8.0),
-                            child: Text('ビアスタイル')),
+                            padding: EdgeInsets.only(left: 4.0),
+                            child: Text('ビアスタイル', style: TextStyle(fontSize: 20.0))),
                         items: beerStyleList
                             .asMap()
                             .entries
@@ -147,7 +148,7 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
                       border: OutlineInputBorder()),
                   onChanged: (String value) {
                     setState(() {
-                      registryBeer.calorie = int.parse(value); 
+                      registryBeer.calorie = int.parse(value);
                     });
                   },
                 ),
@@ -164,7 +165,7 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
                     _selectDate(context, registryBeer);
                   },
                 ),
-                const Gap(10),
+                const Gap(16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -203,8 +204,10 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
                       child: IconButton(
                         icon: const Icon(Icons.add_task),
                         onPressed: () async {
-                          await DbProvider.insertData(registryBeer);
-                          Navigator.of(context).pop();
+                          if (checkInputItem(registryBeer)) {
+                            await DbProvider.insertData(registryBeer);
+                            Navigator.of(context).pop();
+                          }
                         },
                         iconSize: 32.0,
                         color: Colors.white,

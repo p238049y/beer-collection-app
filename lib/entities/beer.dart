@@ -20,7 +20,7 @@ class BeerView {
 
 class RequestBeer {
   String beerName;
-  int beerStyle;
+  int? beerStyle;
   double alcoholDegree;
   int calorie;
   String image;
@@ -28,7 +28,7 @@ class RequestBeer {
 
   RequestBeer({
     this.beerName = '',
-    this.beerStyle = 0,
+    this.beerStyle,
     this.alcoholDegree = 0.0,
     this.calorie = 0,
     this.image = '',
