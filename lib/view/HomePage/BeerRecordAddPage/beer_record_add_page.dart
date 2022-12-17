@@ -161,7 +161,7 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
                       border: OutlineInputBorder()),
                   controller: _textEditingController,
                   onTap: () {
-                    _selectDate(context);
+                    _selectDate(context, registryBeer);
                   },
                 ),
                 const Gap(10),
@@ -218,7 +218,7 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
     );
   }
 
-  _selectDate(BuildContext context) async {
+  _selectDate(BuildContext context, RequestBeer registryBeer) async {
     DateTime selectedDate = DateTime.now();
     final DateTime? newSelectedDate = await showDatePicker(
       context: context,
