@@ -50,6 +50,9 @@ dependencies:
   # データベースのディスクを格納する場所を定義するため
   path:
 
+  # 2つの要素を比較するDeepCollectionを使用するため
+  collection: ^1.0.0
+
 
 
 dev_dependencies:
