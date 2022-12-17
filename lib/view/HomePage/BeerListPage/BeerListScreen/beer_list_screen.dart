@@ -1,8 +1,11 @@
+import 'dart:io';
+
+import 'package:beer_collection/entities/beer.dart';
 import 'package:beer_collection/view/HomePage/BeerListPage/BeerRecordDetailPage/beer_record_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class BeerListScreen extends StatelessWidget {
-  final List<Map<String, dynamic>> beerList;
+  final List<BeerView> beerList;
   const BeerListScreen({Key? key, required this.beerList}) : super(key: key);
 
   @override
@@ -16,14 +19,14 @@ class BeerListScreen extends StatelessWidget {
           return Container(
             child: ListTile(
               minLeadingWidth: 120.0,
-              leading: Image.asset('assets/images/${beerList[index]['image']}'),
-              title: Text(beerList[index]['name']),
-              subtitle: Text('2022/11/20'),
+              leading: Image.file(File(beerList[index].image)),
+              title: Text(beerList[index].beerName),
+              subtitle: Text(beerList[index].registryDateTime),
               onTap: () {
                 Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (context) =>
-                                  BeerRecordDetailPage(),
+                                  BeerRecordDetailPage(beer: beerList[index]),
                         )
                 );
               },
