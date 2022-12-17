@@ -59,7 +59,7 @@ class BeerScreen extends StatelessWidget {
             const Gap(8),
             Text(
               beer.beerName,
-              style:  Styles.headLineStyle2.copyWith(color: Styles.kakiColor),
+              style:  Styles.headLineStyle1.copyWith(color: Styles.kakiColor),
             ),
             Text(
               convertBeerStyleName(beer.beerStyle),
@@ -67,7 +67,7 @@ class BeerScreen extends StatelessWidget {
             ),
             Text(
               '${beer.alcoholDegree}%',
-              style:  Styles.headLineStyle1.copyWith(color: Styles.kakiColor),
+              style:  Styles.headLineStyle2.copyWith(color: Styles.kakiColor),
             ),
             Text(
               beer.registryDateTime,
