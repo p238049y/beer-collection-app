@@ -4,6 +4,7 @@ import 'package:beer_collection/util/app_styles.dart';
 import 'package:beer_collection/view/HealthPage/health_page.dart';
 import 'package:beer_collection/view/HomePage/BeerListPage/beer_list_page.dart';
 import 'package:beer_collection/view/HomePage/BeerScreen/beer_screen.dart';
+import 'package:beer_collection/view/HomePage/GuideScreen/guide_screen.dart';
 import 'package:beer_collection/view/HomePage/SummaryScreen/summary_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -74,7 +75,9 @@ class _HomePageState extends State<HomePage> {
                   SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       padding: const EdgeInsets.only(left: 20),
-                      child: Row(
+                      child: beerList.isEmpty ? 
+                      const GuideScreen() : 
+                      Row(
                         children: beerList
                             .map((beer) => BeerScreen(beer: beer))
                             .toList(),

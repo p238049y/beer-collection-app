@@ -1,14 +1,10 @@
-import 'package:beer_collection/entities/beer.dart';
 import 'package:beer_collection/util/app_layout.dart';
 import 'package:beer_collection/util/app_styles.dart';
-import 'package:beer_collection/util/beer_style_list.dart';
-import 'package:beer_collection/view/HomePage/BeerListPage/BeerRecordDetailPage/beer_record_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-class BeerScreen extends StatelessWidget {
-  final BeerView beer;
-  const BeerScreen({Key? key, required this.beer}) : super(key: key);
+class GuideScreen extends StatelessWidget {
+  const GuideScreen({Key? key}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
@@ -29,17 +25,6 @@ class BeerScreen extends StatelessWidget {
           )
         ]
       ),
-      child: GestureDetector(
-        onTap: () {
-          Navigator
-          .of(context)
-          .push(
-              MaterialPageRoute(
-                  builder: (context) =>
-                      BeerRecordDetailPage(beer: beer),
-              )
-          );
-        },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -48,34 +33,33 @@ class BeerScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Styles.primaryColor,
                 borderRadius: BorderRadius.circular(16),
-                image: DecorationImage(
-                  fit: BoxFit.cover,
+                image: const DecorationImage(
+                  fit: BoxFit.contain,
                   image: AssetImage(
-                    beer.image,
+                    'assets/images/beerExample.png',
                   ),
-                ),
+                )
               ),
             ),
             const Gap(8),
             Text(
-              beer.beerName,
-              style:  Styles.headLineStyle1.copyWith(color: Styles.kakiColor),
-            ),
-            Text(
-              convertBeerStyleName(beer.beerStyle),
-              style:  Styles.headLineStyle3.copyWith(color: Colors.white),
-            ),
-            Text(
-              '${beer.alcoholDegree}%',
+              'ビール名',
               style:  Styles.headLineStyle2.copyWith(color: Styles.kakiColor),
             ),
             Text(
-              beer.registryDateTime,
+              'ビアスタイル',
+              style:  Styles.headLineStyle2.copyWith(color: Colors.white),
+            ),
+            Text(
+              'アルコール度数',
+              style:  Styles.headLineStyle2.copyWith(color: Styles.kakiColor),
+            ),
+            Text(
+              '日付が表示されます',
               style:  Styles.headLineStyle2.copyWith(color: Styles.kakiColor),
             ),
           ]
         ),
-      )
-    );
+      );
   }
 }
