@@ -1,0 +1,7 @@
+{
+  "@@locale": "ja",
+  "my_page": "マイページ",
+    "@my_page": {
+        "description": "マイページ"
+      }
+}
