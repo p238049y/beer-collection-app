@@ -1,3 +1,5 @@
+import 'package:beer_collection/entities/beer.dart';
+import 'package:beer_collection/repository/beer/beer.dart';
 import 'package:beer_collection/util/app_info_first.dart';
 import 'package:beer_collection/view/HomePage/BeerListPage/BeerListScreen/beer_list_screen.dart';
 import 'package:beer_collection/widgets/common_back_button_widget.dart';
@@ -11,6 +13,25 @@ class BeerListPage extends StatefulWidget {
 }
 
 class _BeerListPageState extends State<BeerListPage> {
+  List<BeerView> beerList = [];
+
+  Future<void> initDb() async {
+    await DbProvider.setDb();
+    beerList = await DbProvider.getBeerList();
+    setState(() {});
+  }
+
+  Future<void> reBuild() async {
+    beerList = await DbProvider.getBeerList();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initDb();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
