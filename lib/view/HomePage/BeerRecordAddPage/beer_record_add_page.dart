@@ -1,11 +1,12 @@
 import 'dart:io';
-
+import 'package:beer_collection/entities/beer.dart';
+import 'package:beer_collection/repository/beer/beer.dart';
 import 'package:beer_collection/util/beer_style_list.dart';
-import 'package:bs_flutter_selectbox/bs_flutter_selectbox.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:beer_collection/widgets/common_back_button_widget.dart';
+import 'package:intl/intl.dart';
 
 class BeerRecordAddPage extends StatefulWidget {
   const BeerRecordAddPage({Key? key}) : super(key: key);
@@ -17,13 +18,17 @@ class BeerRecordAddPage extends StatefulWidget {
 class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
   XFile? _image;
   final imagePicker = ImagePicker();
-  DateTime? _selectedDate;
+  DateTime _selectedDate = DateTime.now();
   final TextEditingController _textEditingController = TextEditingController();
+  DateFormat outputFormat = DateFormat('yyyy/MM/dd');
+
+  RequestBeer registryBeer = RequestBeer();
 
   Future getImageFromCamera() async {
     final pickedFile = await imagePicker.pickImage(source: ImageSource.camera);
     setState(() {
       if (pickedFile != null) {
+        registryBeer.image = pickedFile.path;
         _image = XFile(pickedFile.path);
       }
     });
@@ -33,9 +38,21 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
     final pickedFile = await imagePicker.pickImage(source: ImageSource.gallery);
     setState(() {
       if (pickedFile != null) {
+        registryBeer.image = pickedFile.path;
         _image = XFile(pickedFile.path);
       }
     });
+  }
+
+  Future<void> initDb() async {
+    await DbProvider.setDb();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initDb();
   }
 
   @override
@@ -72,16 +89,40 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
                       ),
                       border: OutlineInputBorder()),
                   onChanged: (String value) {
-                    // setState(() {
-                    //   TODO: 保存のための値をセットする;
-                    // });
+                    setState(() {
+                      registryBeer.beerName = value;
+                    });
                   },
                 ),
                 const Gap(16),
-                BsSelectBox(
-                  hintText: 'スタイル',
-                  controller: beerStyleList,
-                ),
+                Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(4.0),
+                    ),
+                    width: double.infinity,
+                    height: 60.0,
+                    child: DropdownButtonHideUnderline(
+                        child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: DropdownButton(
+                        value: registryBeer.beerStyle,
+                        hint: const Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: Text('ビアスタイル')),
+                        items: beerStyleList
+                            .asMap()
+                            .entries
+                            .map((beer) => DropdownMenuItem(
+                                value: beer.key, child: Text(beer.value)))
+                            .toList(),
+                        onChanged: (int? value) {
+                          setState(() {
+                            registryBeer.beerStyle = value ?? 0;
+                          });
+                        },
+                      ),
+                    ))),
                 const Gap(16),
                 TextFormField(
                   decoration: const InputDecoration(
@@ -92,9 +133,9 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
                     border: OutlineInputBorder(),
                   ),
                   onChanged: (String value) {
-                    // setState(() {
-                    //   TODO: 保存のための値をセットする;
-                    // });
+                    setState(() {
+                      registryBeer.alcoholDegree = double.parse(value);
+                    });
                   },
                 ),
                 const Gap(16),
@@ -106,12 +147,12 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
                       ),
                       border: OutlineInputBorder()),
                   onChanged: (String value) {
-                    // setState(() {
-                    //   TODO: 保存のための値をセットする;
-                    // });
+                    setState(() {
+                      registryBeer.calorie = int.parse(value); 
+                    });
                   },
                 ),
-                const Gap(24),
+                const Gap(16),
                 TextFormField(
                   decoration: const InputDecoration(
                       labelText: '日付',
@@ -122,14 +163,10 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
                   controller: _textEditingController,
                   onTap: () {
                     _selectDate(context);
-                  },
-                  onChanged: (String value) {
-                    // setState(() {
-                    //   TODO: 保存のための値をセットする;
-                    // });
+                    registryBeer.registryDateTime = outputFormat.format(_selectedDate);
                   },
                 ),
-                const Gap(24),
+                const Gap(10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -167,9 +204,10 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
                       padding: const EdgeInsets.all(10.0),
                       child: IconButton(
                         icon: const Icon(Icons.add_task),
-                        onPressed: () => {
-                        Navigator.of(context).pop(),
-                      },
+                        onPressed: () async {
+                          await DbProvider.insertData(registryBeer);
+                          Navigator.of(context).pop();
+                        },
                         iconSize: 32.0,
                         color: Colors.white,
                       ),
@@ -183,17 +221,19 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
   }
 
   _selectDate(BuildContext context) async {
-    final newSelectedDate = await showDatePicker(
+    final DateTime? newSelectedDate = await showDatePicker(
       context: context,
       locale: const Locale('ja'),
-      initialDate: _selectedDate ?? DateTime.now(),
+      initialDate: _selectedDate,
       firstDate: DateTime(2000),
       lastDate: DateTime(2040),
     );
 
-    if (newSelectedDate != null) {
-      _selectedDate = newSelectedDate;
-      _textEditingController.text = _selectedDate.toString();
+    if (newSelectedDate != null && newSelectedDate != _selectedDate) {
+      setState(() {
+        _selectedDate = newSelectedDate;
+      });
     }
+    _textEditingController.text = _selectedDate.toString();
   }
 }

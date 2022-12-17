@@ -1,11 +1,13 @@
+import 'package:beer_collection/entities/beer.dart';
 import 'package:beer_collection/util/app_layout.dart';
 import 'package:beer_collection/util/app_styles.dart';
+import 'package:beer_collection/util/beer_style_list.dart';
 import 'package:beer_collection/view/HomePage/BeerListPage/BeerRecordDetailPage/beer_record_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class BeerScreen extends StatelessWidget {
-  final Map<String, dynamic> beer;
+  final BeerView beer;
   const BeerScreen({Key? key, required this.beer}) : super(key: key);
   
   @override
@@ -34,7 +36,7 @@ class BeerScreen extends StatelessWidget {
           .push(
               MaterialPageRoute(
                   builder: (context) =>
-                      BeerRecordDetailPage(),
+                      const BeerRecordDetailPage(),
               )
           );
         },
@@ -49,28 +51,26 @@ class BeerScreen extends StatelessWidget {
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage(
-                    'assets/images/${beer['image']}',
+                    beer.image,
                   ),
                 ),
               ),
             ),
             const Gap(8),
             Text(
-              beer['name'],
+              beer.beerName,
               style:  Styles.headLineStyle2.copyWith(color: Styles.kakiColor),
             ),
             Text(
-              beer['style'],
+              convertBeerStyleName(beer.beerStyle),
               style:  Styles.headLineStyle3.copyWith(color: Colors.white),
             ),
             Text(
-              '${beer['avb']}%',
+              '${beer.alcoholDegree}%',
               style:  Styles.headLineStyle1.copyWith(color: Styles.kakiColor),
             ),
             Text(
-              // ignore: todo
-              //TODO:登録した日付を出す(https://github.com/p238049y/beer-collection-app/issues/8)
-              '2022/11/20',
+              beer.registryDateTime,
               style:  Styles.headLineStyle2.copyWith(color: Styles.kakiColor),
             ),
           ]
