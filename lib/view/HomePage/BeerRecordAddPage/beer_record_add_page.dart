@@ -20,9 +20,9 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
   final imagePicker = ImagePicker();
   DateTime _selectedDate = DateTime.now();
   final TextEditingController _textEditingController = TextEditingController();
-  DateFormat outputFormat = DateFormat('yyyy/MM/dd HH:mm');
+  DateFormat outputFormat = DateFormat('yyyy/MM/dd');
 
-  Beer registryBeer = Beer();
+  RequestBeer registryBeer = RequestBeer();
 
   Future getImageFromCamera() async {
     final pickedFile = await imagePicker.pickImage(source: ImageSource.camera);
@@ -46,7 +46,6 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
 
   Future<void> initDb() async {
     await DbProvider.setDb();
-    // ここでは必要ないかもしれないが一旦残しておく
     setState(() {});
   }
 

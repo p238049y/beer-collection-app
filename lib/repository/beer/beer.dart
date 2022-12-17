@@ -26,7 +26,7 @@ class DbProvider {
     }
   }
 
-    static Future<void> insertData(Beer beer) async {
+    static Future<void> insertData(RequestBeer beer) async {
     await database!.insert(tableName, {
       'beer_name': beer.beerName,
       'beer_style': beer.beerStyle,
@@ -35,5 +35,26 @@ class DbProvider {
       'image': beer.image,
       'registry_date_time': beer.registryDateTime
     });
+  }
+
+  static Future<List<BeerView>> getBeerList() async {
+    final List<Map<String, dynamic>> beerMap = await database!.query(tableName);
+
+    if (beerMap.isEmpty) {
+      return [];
+    } else {
+      List<BeerView> beerList = List.generate(
+        beerMap.length, 
+        (index) => BeerView(
+          id: beerMap[index]['id'],
+          beerName: beerMap[index]['beer_name'],
+          beerStyle: beerMap[index]['beer_style'],
+          alcoholDegree: beerMap[index]['alcohol_degree'],
+          calorie: beerMap[index]['calorie'],
+          image: beerMap[index]['image'],
+          registryDateTime: beerMap[index]['registry_date_time'],
+        ));
+        return beerList;
+    }
   }
 }
