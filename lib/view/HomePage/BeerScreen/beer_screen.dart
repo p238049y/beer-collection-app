@@ -36,7 +36,7 @@ class BeerScreen extends StatelessWidget {
           .push(
               MaterialPageRoute(
                   builder: (context) =>
-                      const BeerRecordDetailPage(),
+                      BeerRecordDetailPage(beer: beer),
               )
           );
         },
