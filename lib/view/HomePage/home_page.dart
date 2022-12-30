@@ -1,6 +1,7 @@
 import 'package:beer_collection/entities/beer.dart';
 import 'package:beer_collection/repository/beer/beer.dart';
 import 'package:beer_collection/util/app_styles.dart';
+import 'package:beer_collection/util/get_week_date.dart';
 import 'package:beer_collection/view/HealthPage/health_page.dart';
 import 'package:beer_collection/view/HomePage/BeerListPage/beer_list_page.dart';
 import 'package:beer_collection/view/HomePage/BeerScreen/beer_screen.dart';
@@ -19,6 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<BeerView> beerList = [];
+  DatePeriod period = getWeekDate();
 
   Future<void> initDb() async {
     await DbProvider.setDb();
@@ -89,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "今週の飲み記録",
+                          '${dateMonthFormat.format(period.startDate)} ~ ${dateMonthFormat.format(period.endDate)}の記録',
                           style: Styles.headLineStyle2,
                         ),
                         InkWell(
@@ -107,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   const Gap(8),
-                  const SummaryScreen(),
+                  SummaryScreen(beerList: beerList, period: period),
                 ],
               ),
             );

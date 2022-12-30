@@ -2,12 +2,12 @@ import 'dart:io';
 import 'package:beer_collection/entities/beer.dart';
 import 'package:beer_collection/repository/beer/beer.dart';
 import 'package:beer_collection/util/beer_style_list.dart';
+import 'package:beer_collection/util/get_week_date.dart';
 import 'package:beer_collection/view/HomePage/BeerRecordAddPage/model.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:beer_collection/widgets/common_back_button_widget.dart';
-import 'package:intl/intl.dart';
 
 class BeerRecordAddPage extends StatefulWidget {
   const BeerRecordAddPage({Key? key}) : super(key: key);
@@ -20,7 +20,6 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
   XFile? _image;
   final imagePicker = ImagePicker();
   final TextEditingController _textEditingController = TextEditingController();
-  DateFormat outputFormat = DateFormat('yyyy/MM/dd');
 
   RequestBeer registryBeer = RequestBeer();
 
@@ -234,9 +233,9 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
     if (newSelectedDate != null && newSelectedDate != selectedDate) {
       setState(() {
         selectedDate = newSelectedDate;
-        registryBeer.registryDateTime = outputFormat.format(newSelectedDate);
+        registryBeer.registryDateTime = dateFormat.format(newSelectedDate);
       });
     }
-    _textEditingController.text = outputFormat.format(selectedDate);
+    _textEditingController.text = dateFormat.format(selectedDate);
   }
 }
