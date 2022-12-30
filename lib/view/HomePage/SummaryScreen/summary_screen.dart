@@ -15,6 +15,7 @@ class SummaryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = AppLayout.getSize(context);
     final List<BeerView> weeklyBeerList = getWeeklyBeerList(beerList, period);
+    final int sumCalorie = getSumCalorie(weeklyBeerList);
     return  Container(
       width: size.width * 0.6,
       height: 220,
@@ -46,7 +47,7 @@ class SummaryScreen extends StatelessWidget {
             style:  Styles.headLineStyle2.copyWith(color: Colors.black),
           ),
           Text(
-            'カロリー: 1200kcal',
+            'カロリー: ${sumCalorie}kcal',
             style:  Styles.headLineStyle2.copyWith(color: Colors.black),
           ),
           const Gap(16),
