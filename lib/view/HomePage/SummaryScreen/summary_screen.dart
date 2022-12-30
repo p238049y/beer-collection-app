@@ -1,15 +1,20 @@
+import 'package:beer_collection/entities/beer.dart';
 import 'package:beer_collection/util/app_layout.dart';
 import 'package:beer_collection/util/app_styles.dart';
+import 'package:beer_collection/util/get_week_date.dart';
+import 'package:beer_collection/view/HomePage/SummaryScreen/model.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class SummaryScreen extends StatelessWidget {
-  const SummaryScreen({Key? key}) : super(key: key);
-
+  final List<BeerView> beerList;
+  final DatePeriod period;
+  const SummaryScreen({Key? key, required this.beerList, required this.period}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final size = AppLayout.getSize(context);
+    final List<BeerView> weeklyBeerList = getWeeklyBeerList(beerList, period);
     return  Container(
       width: size.width * 0.6,
       height: 220,
@@ -36,10 +41,8 @@ class SummaryScreen extends StatelessWidget {
             ),
           ),
           const Gap(8),
-          // ignore: todo
-          // TODO: https://github.com/p238049y/beer-collection-app/issues/8で改修する
           Text(
-            '本数: ５本',
+            '本数: ${weeklyBeerList.length}本',
             style:  Styles.headLineStyle2.copyWith(color: Colors.black),
           ),
           Text(

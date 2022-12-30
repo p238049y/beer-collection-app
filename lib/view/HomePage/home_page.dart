@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   const Gap(8),
-                  const SummaryScreen(),
+                  SummaryScreen(beerList: beerList, period: period),
                 ],
               ),
             );
