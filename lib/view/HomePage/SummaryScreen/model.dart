@@ -27,7 +27,7 @@ int getSumCalorie(List<BeerView> beerList) {
   return sumCalorie;
 }
 
-int calcCaloriesBurned(int exerciseType, double weight, double calorie) {
+int calcCaloriesBurnedTime(int exerciseType, double weight, int calorie) {
   // 成人の体重1kg、1時間あたりの安静時のエネルギー消費量(resting energy expenditure)
   double REE = 1.05;
   double METs = 0.0;
@@ -43,7 +43,7 @@ int calcCaloriesBurned(int exerciseType, double weight, double calorie) {
       break;
   }
   
-  double burnedCalories = calorie / (METs * weight * REE) * 60;
-  int parseIntCalories = burnedCalories.toInt();
-  return parseIntCalories;
+  double burnedCaloriesTime = calorie / (METs * weight * REE) * 60;
+  int parseIntTime = burnedCaloriesTime.toInt();
+  return parseIntTime;
 }
