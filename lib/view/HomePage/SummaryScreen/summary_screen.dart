@@ -16,6 +16,8 @@ class SummaryScreen extends StatelessWidget {
     final size = AppLayout.getSize(context);
     final List<BeerView> weeklyBeerList = getWeeklyBeerList(beerList, period);
     final int sumCalorie = getSumCalorie(weeklyBeerList);
+    final int walkingTime = calcCaloriesBurnedTime(1, 50.0, sumCalorie);
+    final int runningTime = calcCaloriesBurnedTime(2, 50.0, sumCalorie);
     return  Container(
       width: size.width * 0.6,
       height: 220,
@@ -57,11 +59,11 @@ class SummaryScreen extends StatelessWidget {
           ),
           const Gap(8),
           Text(
-            'ランニング: 120分',
+            'ランニング: $runningTime分',
             style:  Styles.headLineStyle2.copyWith(color: Colors.black),
           ),
                     Text(
-            'ウォーキング: 240分',
+            'ウォーキング: $walkingTime分',
             style:  Styles.headLineStyle2.copyWith(color: Colors.black),
           ),
         ]
