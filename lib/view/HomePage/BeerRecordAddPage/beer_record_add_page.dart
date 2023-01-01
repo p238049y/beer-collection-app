@@ -6,6 +6,7 @@ import 'package:beer_collection/util/get_week_date.dart';
 import 'package:beer_collection/util/validator.dart';
 import 'package:beer_collection/view/HomePage/BeerRecordAddPage/model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:beer_collection/widgets/common_back_button_widget.dart';
@@ -113,7 +114,8 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
                         value: registryBeer.beerStyle,
                         hint: const Padding(
                             padding: EdgeInsets.only(left: 4.0),
-                            child: Text('ビアスタイル', style: TextStyle(fontSize: 20.0))),
+                            child: Text('ビアスタイル',
+                                style: TextStyle(fontSize: 20.0))),
                         items: beerStyleList
                             .asMap()
                             .entries
@@ -144,6 +146,8 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
                 ),
                 const Gap(16),
                 TextFormField(
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   decoration: const InputDecoration(
                       labelText: 'カロリー',
                       labelStyle: TextStyle(
