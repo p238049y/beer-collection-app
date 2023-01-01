@@ -3,6 +3,7 @@ import 'package:beer_collection/entities/beer.dart';
 import 'package:beer_collection/repository/beer/beer.dart';
 import 'package:beer_collection/util/beer_style_list.dart';
 import 'package:beer_collection/util/get_week_date.dart';
+import 'package:beer_collection/util/validator.dart';
 import 'package:beer_collection/view/HomePage/BeerRecordAddPage/model.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -87,6 +88,10 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
                         fontSize: 20,
                       ),
                       border: OutlineInputBorder()),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    return inputValidation(value!, 8);
+                  },
                   onChanged: (String value) {
                     setState(() {
                       registryBeer.beerName = value;
