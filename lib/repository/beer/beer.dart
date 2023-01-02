@@ -53,6 +53,7 @@ class DbProvider {
                 beerMap[index]['image'],
                 beerMap[index]['registry_date_time'],
               ));
+      beerList.sort(((a, b) => b.registryDateTime.compareTo(a.registryDateTime)));
       return beerList;
     }
   }
