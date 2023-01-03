@@ -14,8 +14,9 @@ class _BottomBarState extends State<BottomBar> {
 
   static final List<Widget> widgetOptions = <Widget> [
     const HomePage(),
-    const Text("Learning"),
-    const Text("Health"),
+    // TODO: v1.1以降で実装
+    // const Text("Learning"),
+    // const Text("Health"),
     const Text("Profile"),
   ];
 
@@ -45,15 +46,16 @@ class _BottomBarState extends State<BottomBar> {
             icon: Icon(FluentSystemIcons.ic_fluent_home_regular),
             activeIcon: Icon(FluentSystemIcons.ic_fluent_home_filled),
             label: "Home"),
-        BottomNavigationBarItem(
-            icon: Icon(FluentSystemIcons.ic_fluent_book_formula_database_regular),
-            activeIcon: Icon(FluentSystemIcons.ic_fluent_book_formula_database_filled),
-            label: "Learning"),
-        BottomNavigationBarItem(
-            icon: Icon(FluentSystemIcons.ic_fluent_accessibility_regular),
-            activeIcon: Icon(FluentSystemIcons.ic_fluent_accessibility_filled),
-            label: "Health",
-        ),
+        // TODO: v1.1以降で実装
+        // BottomNavigationBarItem(
+        //     icon: Icon(FluentSystemIcons.ic_fluent_book_formula_database_regular),
+        //     activeIcon: Icon(FluentSystemIcons.ic_fluent_book_formula_database_filled),
+        //     label: "Learning"),
+        // BottomNavigationBarItem(
+        //     icon: Icon(FluentSystemIcons.ic_fluent_accessibility_regular),
+        //     activeIcon: Icon(FluentSystemIcons.ic_fluent_accessibility_filled),
+        //     label: "Health",
+        // ),
         BottomNavigationBarItem(
             icon: Icon(FluentSystemIcons.ic_fluent_person_regular),
             activeIcon: Icon(FluentSystemIcons.ic_fluent_person_filled),

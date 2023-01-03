@@ -94,17 +94,18 @@ class _HomePageState extends State<HomePage> {
                           '${dateMonthFormat.format(period.startDate)} ~ ${dateMonthFormat.format(period.endDate)}の記録',
                           style: Styles.headLineStyle2,
                         ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const HealthPage()));
-                          },
-                          child: Text(
-                            "View detail > ",
-                            style: Styles.textStyle
-                                .copyWith(color: Styles.primaryColor),
-                          ),
-                        ),
+                        // TODO: v1.1以降で実装
+                        // InkWell(
+                        //   onTap: () {
+                        //     Navigator.of(context).push(MaterialPageRoute(
+                        //         builder: (context) => const HealthPage()));
+                        //   },
+                        //   child: Text(
+                        //     "View detail > ",
+                        //     style: Styles.textStyle
+                        //         .copyWith(color: Styles.primaryColor),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
