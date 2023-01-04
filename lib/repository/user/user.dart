@@ -1,4 +1,3 @@
-import 'package:beer_collection/entities/beer.dart';
 import 'package:beer_collection/entities/user.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -13,7 +12,7 @@ class UserDbProvider {
   }
 
   static Future<Database> initDb() async {
-    String path = join(await getDatabasesPath(), 'beer.db');
+    String path = join(await getDatabasesPath(), 'user.db');
     return await openDatabase(path, version: 1, onCreate: _createTable);
   }
 
