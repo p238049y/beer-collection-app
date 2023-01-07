@@ -1,5 +1,7 @@
 import 'package:beer_collection/entities/beer.dart';
+import 'package:beer_collection/entities/user.dart';
 import 'package:beer_collection/repository/beer/beer.dart';
+import 'package:beer_collection/repository/user/user.dart';
 import 'package:beer_collection/util/app_styles.dart';
 import 'package:beer_collection/util/get_week_date.dart';
 import 'package:beer_collection/view/HealthPage/health_page.dart';
@@ -22,9 +24,19 @@ class _HomePageState extends State<HomePage> {
   List<BeerView> beerList = [];
   DatePeriod period = getWeekDate();
 
+  List<UserView> userList = [];
+  UserView userDate = UserView(0, '未登録', 0, 0);
+
   Future<void> initDb() async {
     await DbProvider.setDb();
     beerList = await DbProvider.getBeerList();
+
+    await UserDbProvider.setDb();
+    userList = await UserDbProvider.getUserData();
+    if (userList.isNotEmpty) {
+      userDate = userList[0];
+    }
+
     setState(() {});
   }
 
@@ -110,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   const Gap(8),
-                  SummaryScreen(beerList: beerList, period: period),
+                  SummaryScreen(beerList: beerList, period: period, userData: userDate),
                 ],
               ),
             );
