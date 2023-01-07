@@ -19,13 +19,17 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<void> initDb() async {
     await UserDbProvider.setDb();
     userList = await UserDbProvider.getUserData();
-    userDate = userList[0];
+    if (userList.isNotEmpty) {
+      userDate = userList[0];
+    }
     setState(() {});
   }
 
   Future<void> reBuild() async {
     userList = await UserDbProvider.getUserData();
-    userDate = userList[0];
+    if (userList.isNotEmpty) {
+      userDate = userList[0];
+    }
     setState(() {});
   }
 
