@@ -1,6 +1,7 @@
 import 'package:beer_collection/entities/user.dart';
 import 'package:beer_collection/repository/user/user.dart';
 import 'package:beer_collection/view/ProfilePage/ProfileAddPage/profile_add_page.dart';
+import 'package:beer_collection/view/ProfilePage/ProfileEditPage/profile_edit_page.dart';
 import 'package:beer_collection/widgets/list_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -56,7 +57,10 @@ class _ProfilePageState extends State<ProfilePage> {
               : [
                   IconButton(
                     icon: const Icon(Icons.create),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ProfileEditPage(userDate: userDate)));
+                    },
                   ),
                 ],
           iconTheme: const IconThemeData(color: Colors.blueGrey),
