@@ -4,7 +4,6 @@ import 'package:beer_collection/repository/beer/beer.dart';
 import 'package:beer_collection/repository/user/user.dart';
 import 'package:beer_collection/util/app_styles.dart';
 import 'package:beer_collection/util/get_week_date.dart';
-import 'package:beer_collection/view/HealthPage/health_page.dart';
 import 'package:beer_collection/view/HomePage/BeerListPage/beer_list_page.dart';
 import 'package:beer_collection/view/HomePage/BeerScreen/beer_screen.dart';
 import 'package:beer_collection/view/HomePage/GuideScreen/guide_screen.dart';
@@ -71,7 +70,9 @@ class _HomePageState extends State<HomePage> {
                           "最新のビール記録",
                           style: Styles.headLineStyle2,
                         ),
-                        InkWell(
+                        Visibility(
+                          visible: beerList.isNotEmpty,
+                          child: InkWell(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => const BeerListPage()));
@@ -81,6 +82,7 @@ class _HomePageState extends State<HomePage> {
                             style: Styles.textStyle
                                 .copyWith(color: Styles.primaryColor),
                           ),
+                        ),
                         ),
                       ],
                     ),
