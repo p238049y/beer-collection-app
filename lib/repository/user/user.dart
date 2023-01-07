@@ -50,4 +50,15 @@ class UserDbProvider {
       return userList;
     }
   }
+
+  static Future<void> updateUserData(UserView user) async {
+    await database!.update(tableName,  {
+      'user_name': user.userName,
+      'height': user.height,
+      'weight': user.weight,
+    }, 
+      where: 'id = ?',
+      whereArgs: [user.id]
+    );
+  }
 }
