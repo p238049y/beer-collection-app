@@ -44,6 +44,11 @@ int calcCaloriesBurnedTime(int exerciseType, double weight, int calorie) {
   }
   
   double burnedCaloriesTime = calorie / (METs * weight * REE) * 60;
-  int parseIntTime = burnedCaloriesTime.toInt();
-  return parseIntTime;
+
+  if (burnedCaloriesTime.isNaN || burnedCaloriesTime.isInfinite) {
+    return 0;
+  } else {
+    int parseIntTime = burnedCaloriesTime.toInt();
+    return parseIntTime;
+  }
 }
