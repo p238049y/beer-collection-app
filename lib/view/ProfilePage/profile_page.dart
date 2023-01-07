@@ -69,31 +69,35 @@ class _ProfilePageState extends State<ProfilePage> {
             return Scaffold(
               body: Padding(
                 padding: const EdgeInsets.only(right: 16.0, left: 16.0),
-                child: Column(
-                  children: [
-                    SizedBox(
-                        width: 350,
-                        height: 250,
-                        child: Image.asset('assets/images/profile.png')),
-                    const Gap(16),
-                    ListItem(
-                        isEnabled: false, title: '名前', name: userDate.userName),
-                    const Gap(16),
-                    ListItem(
-                        isEnabled: false,
-                        title: '身長',
-                        name: userDate.height.toString(),
-                        unit: 'cm'),
-                    const Gap(16),
-                    ListItem(
-                        isEnabled: false,
-                        title: '体重',
-                        name: userDate.weight.toString(),
-                        unit: 'kg'),
-                    const Gap(8),
-                    const Text('(他のユーザーに公開されることは一切ありません)',
-                        style: TextStyle(fontWeight: FontWeight.bold))
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                          width: 350,
+                          height: 250,
+                          child: Image.asset('assets/images/profile.png')),
+                      const Gap(16),
+                      ListItem(
+                          isEnabled: false,
+                          title: '名前',
+                          name: userDate.userName),
+                      const Gap(16),
+                      ListItem(
+                          isEnabled: false,
+                          title: '身長',
+                          name: userDate.height.toString(),
+                          unit: 'cm'),
+                      const Gap(16),
+                      ListItem(
+                          isEnabled: false,
+                          title: '体重',
+                          name: userDate.weight.toString(),
+                          unit: 'kg'),
+                      const Gap(8),
+                      const Text('(他のユーザーに公開されることは一切ありません)',
+                          style: TextStyle(fontWeight: FontWeight.bold))
+                    ],
+                  ),
                 ),
               ),
             );
