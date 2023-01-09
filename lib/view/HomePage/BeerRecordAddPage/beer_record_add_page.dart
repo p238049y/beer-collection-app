@@ -91,7 +91,7 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
                       border: OutlineInputBorder()),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
-                    return inputValidation(value!, 7);
+                    return inputValidation(value!, 50);
                   },
                   onChanged: (String value) {
                     setState(() {
