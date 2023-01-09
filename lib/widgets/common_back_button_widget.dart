@@ -1,5 +1,6 @@
 import 'package:beer_collection/util/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CommonBackButton extends StatelessWidget with PreferredSizeWidget{
   const CommonBackButton({Key? key}) : super(key: key);
@@ -20,8 +21,12 @@ class CommonBackButton extends StatelessWidget with PreferredSizeWidget{
             fontSize: 15.0
           ),  
         ),
-        onPressed: () => Navigator.of(context).pop(),
-        )
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.light, // for iOS
+          statusBarIconBrightness: Brightness.dark, // for Android
+        ),
       );
   }
 
