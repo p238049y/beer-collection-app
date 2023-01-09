@@ -65,7 +65,7 @@ class _BeerListPageState extends State<BeerListPage> {
                 child: ListTile(
                   minLeadingWidth: 120.0,
                   leading: Image.file(File(beerList[index].image)),
-                  title: Text(beerList[index].beerName),
+                  title: Text(beerList[index].beerName, maxLines: 1, overflow: TextOverflow.ellipsis),
                   subtitle: Text(beerList[index].registryDateTime),
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
