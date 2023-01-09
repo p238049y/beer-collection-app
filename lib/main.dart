@@ -5,12 +5,18 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  //向き指定
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp, //縦固定
+  ]);
+
   SystemChrome.setSystemUIOverlayStyle(
-  const SystemUiOverlayStyle(
-    statusBarBrightness: Brightness.light,     // for iOS
-    statusBarIconBrightness: Brightness.dark,  // for Android
-  ),
-);
+    const SystemUiOverlayStyle(
+      statusBarBrightness: Brightness.light, // for iOS
+      statusBarIconBrightness: Brightness.dark, // for Android
+    ),
+  );
   runApp(const MyApp());
 }
 
