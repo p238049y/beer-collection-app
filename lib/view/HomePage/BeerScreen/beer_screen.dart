@@ -60,6 +60,7 @@ class BeerScreen extends StatelessWidget {
             Text(
               beer.beerName,
               style:  Styles.headLineStyle1.copyWith(color: Styles.kakiColor),
+              overflow: TextOverflow.ellipsis,
             ),
             Text(
               convertBeerStyleName(beer.beerStyle),
