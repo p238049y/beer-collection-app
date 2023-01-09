@@ -21,10 +21,10 @@ void main() {
   group('引数により与えられた期間のビール記録を取得するためメソッドであるgetWeeklyBeerListのテスト', (){
     List<BeerView> dummyBeerList = getDummyBeerList();
     group('期間の始まりか終わりの日付がデータの日付と被っている場合にそのデータが返ってくることを確かめるためのテスト', () {
-      test('期間が2022/12/09から2022/12/16の場合長1のリストが返ってくること', () {
+      test('期間が2022/12/09から2022/12/16の場合長2のリストが返ってくること', () {
         final DatePeriod period = DatePeriod(DateTime.utc(2022, 12, 9), DateTime.utc(2022, 12,16));
         final List<BeerView> weeklyBeerList = getWeeklyBeerList(dummyBeerList, period);
-        expect(weeklyBeerList.length, 1);
+        expect(weeklyBeerList.length, 2);
       });
 
       test('期間が2022/12/04から2022/12/09の場合長1のリストが返ってくること', () {
