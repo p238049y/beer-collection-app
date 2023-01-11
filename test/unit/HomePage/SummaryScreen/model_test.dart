@@ -22,13 +22,13 @@ void main() {
     List<BeerView> dummyBeerList = getDummyBeerList();
     group('期間の始まりか終わりの日付がデータの日付と被っている場合にそのデータが返ってくることを確かめるためのテスト', () {
       test('期間が2022/12/09から2022/12/16の場合長2のリストが返ってくること', () {
-        final DatePeriod period = DatePeriod(DateTime.utc(2022, 12, 9), DateTime.utc(2022, 12,16));
+        final DatePeriod period = DatePeriod('2022/12/09', '2022/12/16');
         final List<BeerView> weeklyBeerList = getWeeklyBeerList(dummyBeerList, period);
         expect(weeklyBeerList.length, 2);
       });
 
       test('期間が2022/12/04から2022/12/09の場合長1のリストが返ってくること', () {
-        final DatePeriod period = DatePeriod(DateTime.utc(2022, 12, 4), DateTime.utc(2022, 12, 9));
+        final DatePeriod period = DatePeriod('2022/12/04', '2022/12/09');
         final List<BeerView> weeklyBeerList = getWeeklyBeerList(dummyBeerList, period);
         expect(weeklyBeerList.length, 1);
       });
@@ -36,7 +36,7 @@ void main() {
 
     group('期間内にデータの日付がおさまっている場合そのデータが返ってくることを確かめるためのテスト', () {
       test('期間が2022/12/10から2022/12/18の場合長1のリストが返ってくること', () {
-        final DatePeriod period = DatePeriod(DateTime.utc(2022, 12, 10), DateTime.utc(2022, 12, 18));
+        final DatePeriod period = DatePeriod('2022/12/10', '2022/12/18');
         final List<BeerView> weeklyBeerList = getWeeklyBeerList(dummyBeerList, period);
         expect(weeklyBeerList.length, 2);
       });
@@ -44,7 +44,7 @@ void main() {
 
     group('期間内にデータの日付がおさまっていない場合何もデータが返ってこないことを確かめるためのテスト', () {
       test('期間が2022/11/10から2022/11/18の場合長0のリストが返ってくること', () {
-        final DatePeriod period = DatePeriod(DateTime.utc(2022, 11, 10), DateTime.utc(2022, 11, 18));
+        final DatePeriod period = DatePeriod('2022/11/10', '2022/11/18');
         final List<BeerView> weeklyBeerList = getWeeklyBeerList(dummyBeerList, period);
         expect(weeklyBeerList.length, 0);
       });
