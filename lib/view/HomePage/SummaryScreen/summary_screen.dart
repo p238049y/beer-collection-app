@@ -1,25 +1,19 @@
 import 'package:beer_collection/entities/beer.dart';
-import 'package:beer_collection/entities/user.dart';
 import 'package:beer_collection/util/app_layout.dart';
 import 'package:beer_collection/util/app_styles.dart';
-import 'package:beer_collection/util/get_week_date.dart';
-import 'package:beer_collection/view/HomePage/SummaryScreen/model.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class SummaryScreen extends StatelessWidget {
-  final List<BeerView> beerList;
-  final DatePeriod period;
-  final UserView userData;
-  const SummaryScreen({Key? key, required this.beerList, required this.period, required this.userData}) : super(key: key);
+  final List<BeerView> weeklyBeerList;
+  final int sumCalorie;
+  final int walkingTime;
+  final int runningTime;
+  const SummaryScreen({Key? key, required this.weeklyBeerList, required this.sumCalorie, required this.walkingTime, required this.runningTime}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final size = AppLayout.getSize(context);
-    final List<BeerView> weeklyBeerList = getWeeklyBeerList(beerList, period);
-    final int sumCalorie = getSumCalorie(weeklyBeerList);
-    final int walkingTime = calcCaloriesBurnedTime(1, userData.weight, sumCalorie);
-    final int runningTime = calcCaloriesBurnedTime(2, userData.weight, sumCalorie);
     return  Container(
       width: size.width * 0.6,
       height: 220,

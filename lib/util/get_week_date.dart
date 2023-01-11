@@ -4,8 +4,8 @@ DateFormat dateFormat = DateFormat('yyyy/MM/dd');
 DateFormat dateMonthFormat = DateFormat('MM/dd');
 
 class DatePeriod {
-  DateTime startDate = DateTime.utc(0, 0, 0);
-  DateTime endDate = DateTime.utc(0, 0, 0);
+  String startDate = '';
+  String endDate = '';
 
   DatePeriod(this.startDate, this.endDate);
 }
@@ -19,7 +19,7 @@ DatePeriod getWeekDate(){
   DateTime startDate = today.subtract(Duration(days: weekdayToday));
   DateTime endDate = startDate.add(const Duration(days: 6));
 
-  DatePeriod period = DatePeriod(startDate, endDate);
+  DatePeriod period = DatePeriod(dateFormat.format(startDate), dateFormat.format(endDate));
 
   return period;
 }

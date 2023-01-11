@@ -7,6 +7,7 @@ import 'package:beer_collection/util/get_week_date.dart';
 import 'package:beer_collection/view/HomePage/BeerListPage/beer_list_page.dart';
 import 'package:beer_collection/view/HomePage/BeerScreen/beer_screen.dart';
 import 'package:beer_collection/view/HomePage/GuideScreen/guide_screen.dart';
+import 'package:beer_collection/view/HomePage/SummaryScreen/model.dart';
 import 'package:beer_collection/view/HomePage/SummaryScreen/summary_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -23,17 +24,29 @@ class _HomePageState extends State<HomePage> {
   List<BeerView> beerList = [];
   DatePeriod period = getWeekDate();
 
+  List<BeerView> weeklyBeerList = [];
+  int sumCalorie = 0;
+  int walkingTime = 0;
+  int runningTime = 0;
+
   List<UserView> userList = [];
-  UserView userDate = UserView(0, '未登録', 0, 0);
+  UserView userData = UserView(0, '未登録', 0, 0);
 
   Future<void> initDb() async {
     await DbProvider.setDb();
     beerList = await DbProvider.getBeerList();
 
+    if (beerList.isNotEmpty) {
+      weeklyBeerList = getWeeklyBeerList(beerList, period);
+    }
+
     await UserDbProvider.setDb();
     userList = await UserDbProvider.getUserData();
     if (userList.isNotEmpty) {
-      userDate = userList[0];
+      userData = userList[0];
+      sumCalorie = getSumCalorie(weeklyBeerList);
+      walkingTime = calcCaloriesBurnedTime(1, userData.weight, sumCalorie);
+      runningTime = calcCaloriesBurnedTime(2, userData.weight, sumCalorie);
     }
 
     setState(() {});
@@ -41,6 +54,10 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> reBuild() async {
     beerList = await DbProvider.getBeerList();
+    weeklyBeerList = getWeeklyBeerList(beerList, period);
+    sumCalorie = getSumCalorie(weeklyBeerList);
+    walkingTime = calcCaloriesBurnedTime(1, userData.weight, sumCalorie);
+    runningTime = calcCaloriesBurnedTime(2, userData.weight, sumCalorie);
     setState(() {});
   }
 
@@ -105,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${dateMonthFormat.format(period.startDate)} ~ ${dateMonthFormat.format(period.endDate)}の記録',
+                          '${period.startDate} ~ ${period.endDate}の記録',
                           style: Styles.headLineStyle2,
                         ),
                         // TODO: v1.1以降で実装
@@ -124,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   const Gap(8),
-                  SummaryScreen(beerList: beerList, period: period, userData: userDate),
+                  SummaryScreen(weeklyBeerList: weeklyBeerList, sumCalorie: sumCalorie, walkingTime: walkingTime, runningTime: runningTime),
                 ],
               ),
             );
