@@ -58,6 +58,20 @@ class DbProvider {
     }
   }
 
+  static Future<void> updateBeerData(BeerView beer) async {
+    await database!.update(tableName, {
+      'beer_name': beer.beerName,
+      'beer_style': beer.beerStyle,
+      'alcohol_degree': beer.alcoholDegree,
+      'calorie': beer.calorie,
+      'image': beer.image,
+      'registry_date_time': beer.registryDateTime
+    },
+      where: 'id = ?',
+      whereArgs: [beer.id]
+    );
+  }
+
   static Future<void> deleteData(int id) async {
     await database!.delete(tableName, where: 'id = ?', whereArgs: [id]);
   }
