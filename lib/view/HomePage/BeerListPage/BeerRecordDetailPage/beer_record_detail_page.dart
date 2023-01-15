@@ -3,7 +3,6 @@ import 'package:beer_collection/entities/beer.dart';
 import 'package:beer_collection/repository/beer/beer.dart';
 import 'package:beer_collection/util/beer_style_list.dart';
 import 'package:beer_collection/view/HomePage/BeerListPage/BeerRecordEditPage/beer_record_edit_page.dart';
-import 'package:beer_collection/widgets/common_back_button_widget.dart';
 import 'package:beer_collection/widgets/list_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -42,7 +41,6 @@ class _BeerRecordDetailPageState extends State<BeerRecordDetailPage> {
     return Scaffold(
         appBar: AppBar(
           actions: [
-            // const CommonBackButton(),
             IconButton(
               icon: const Icon(Icons.create),
               onPressed: () {
