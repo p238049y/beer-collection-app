@@ -58,6 +58,26 @@ class DbProvider {
     }
   }
 
+  static Future<BeerView> getBeerData(int id) async {
+   final List<Map> beerMap  = await database!.query(tableName, where: 'id = ?', whereArgs: [id]);
+   if (beerMap.isEmpty) {
+    return BeerView(id, '', 0, 0, 0, '', '');
+   } else {
+    List<BeerView> beerList = List.generate(
+          beerMap.length,
+          (index) => BeerView(
+                beerMap[index]['id'],
+                beerMap[index]['beer_name'],
+                beerMap[index]['beer_style'],
+                beerMap[index]['alcohol_degree'],
+                beerMap[index]['calorie'],
+                beerMap[index]['image'],
+                beerMap[index]['registry_date_time'],
+              ));
+    return beerList.first;
+   }
+  }
+
   static Future<void> updateBeerData(BeerView beer) async {
     await database!.update(tableName, {
       'beer_name': beer.beerName,
