@@ -70,7 +70,7 @@ class _BeerListPageState extends State<BeerListPage> {
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) =>
-                          BeerRecordDetailPage(beer: beerList[index]),
+                          BeerRecordDetailPage(beerId: beerList[index].id),
                     ));
                   },
                 )));

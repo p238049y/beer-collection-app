@@ -11,16 +11,7 @@ class CommonBackButton extends StatelessWidget with PreferredSizeWidget {
       elevation: 0,
       backgroundColor: Colors.transparent,
       leadingWidth: 80,
-      leading: TextButton(
-        child: Text(
-          '< back',
-          style: TextStyle(
-              color: Styles.primaryColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 15.0),
-        ),
-        onPressed: () => Navigator.of(context).pop(),
-      ),
+      iconTheme: IconThemeData( color: Styles.primaryColor ),
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarBrightness: Brightness.light, // for iOS
         statusBarIconBrightness: Brightness.dark, // for Android
