@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:beer_collection/entities/beer.dart';
 import 'package:beer_collection/util/app_layout.dart';
 import 'package:beer_collection/util/app_styles.dart';
@@ -50,9 +51,7 @@ class BeerScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(
-                    beer.image,
-                  ),
+                  image: FileImage(File(beer.image)),
                 ),
               ),
             ),
