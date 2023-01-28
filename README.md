@@ -1,8 +1,9 @@
-# beer_collection
+# beer collection app
 
-A new Flutter project.
+## 概要
 
-## Getting Started
+- ビールを記録するためのアプリ
+- ビール記録の際にカロリーを入力すると、そのカロリーを消費するために必要な運動時間が表示される
 
 This project is a starting point for a Flutter application.
 
