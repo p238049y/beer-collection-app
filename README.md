@@ -5,13 +5,21 @@
 - ビールを記録するためのアプリ
 - ビール記録の際にカロリーを入力すると、そのカロリーを消費するために必要な運動時間が表示される
 
-This project is a starting point for a Flutter application.
+## 詳細情報
 
-A few resources to get you started if this is your first Flutter project:
+|                                画面                                | 説明                                                                                                                                                                                                                                                                                                                             |
+| :----------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   <img src="assets/images/screen_shot/homePage.png" width="250">   | <br>**ホーム画面**<br><br> • 画面上部には最新のビール記録が表示されます。<br>ビール記録は登録日が新しい順に表示されます<br> • 画面下部には当日を含む１週間のビールの記録から算出された本数、カロリー、そのカロリーを消費するための運動時間が表示されます。予め、プロフィール画面よりユーザーの身長と体重を登録する必要があります |
+|  <img src="assets/images/screen_shot/detailPage.png" width="250">  | <br>**ビール記録詳細画面**<br><br> • ビールを記録する際に入力した情報が表示されます。表示内容はビール名、ビアスタイル、アルコール度数、カロリー、日付、画像です。編集も可能です。                                                                                                                                                |
+| <img src="assets/images/screen_shot/registryPage.png" width="250"> | <br>**ビール記録登録画面**<br><br> • ビールを記録するための画面。ビール名、ビアスタイル、アルコール度数、カロリー、日付、画像をを入力します。画像はライブラリから選択するか、カメラで撮影したものを使用することができます。                                                                                                      |
+| <img src="assets/images/screen_shot/profilePage.png" width="250">  | <br>**プロフィール画面**<br><br> • ユーザーの名前、身長、体重が表示されます。ホーム画面に表示される運動時間の計算に用いられます。                                                                                                                                                                                                |
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## ファイル構成
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 起動方法
+
+以下のコマンドを実行する
+
+```bash
+ ❯❯❯ flutter run
+```
