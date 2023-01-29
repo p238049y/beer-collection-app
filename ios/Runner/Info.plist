@@ -46,9 +46,9 @@
 		<key>CADisableMinimumFrameDurationOnPhone</key>
 		<true/>
 		<key>NSPhotoLibraryUsageDescription</key>
-		<string>フォトライブラリを利用する理由を記載</string>
+		<string>ビールを記録するための写真を選択します。</string>
 		<key>NSCameraUsageDescription</key>
-		<string>カメラを利用する理由を記載</string>
+		<string>ビールを記録するための写真を撮影します。</string>
 		<key>NSMicrophoneUsageDescription</key>
 		<string>マイクを利用する理由を記載</string>
 		<key>UIStatusBarHidden</key>
