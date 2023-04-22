@@ -89,3 +89,18 @@
 ```bash
  ❯❯❯ flutter install -d [デバイスID]
 ```
+
+## google play からインストールできます
+
+<img src="assets/images/ForREADME/google_play_link.png" width="250">
+
+## リリースノート
+
+### 2023/04/10: ver 1.0.0
+
+- ビール記録機能、カロリー計算機能を追加しました
+- プロフィール登録、閲覧機能を追加しました
+
+### 2022/04/13: ver 1.0.1
+
+- アプリ起動時にクラッシュする事象を解消しました
