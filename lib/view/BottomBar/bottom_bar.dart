@@ -1,3 +1,4 @@
+import 'package:beer_collection/view/HealthPage/health_page.dart';
 import 'package:beer_collection/view/HomePage/home_page.dart';
 import 'package:beer_collection/view/ProfilePage/profile_page.dart';
 import 'package:fluentui_icons/fluentui_icons.dart';
@@ -15,10 +16,10 @@ class _BottomBarState extends State<BottomBar> {
 
   static final List<Widget> widgetOptions = <Widget>[
     const HomePage(),
+    const HealthPage(),
     const ProfilePage(),
     // TODO: v1.1以降で実装
     // const Text("Learning"),
-    // const Text("Health"),
   ];
 
   void _onItemTapped(int index) {
@@ -48,6 +49,10 @@ class _BottomBarState extends State<BottomBar> {
               activeIcon: Icon(FluentSystemIcons.ic_fluent_home_filled),
               label: "Home"),
           BottomNavigationBarItem(
+              icon: Icon(FluentSystemIcons.ic_fluent_accessibility_regular),
+              activeIcon: Icon(FluentSystemIcons.ic_fluent_accessibility_filled),
+              label: "Health"),
+          BottomNavigationBarItem(
               icon: Icon(FluentSystemIcons.ic_fluent_person_regular),
               activeIcon: Icon(FluentSystemIcons.ic_fluent_person_filled),
               label: "Profile"),
@@ -56,10 +61,6 @@ class _BottomBarState extends State<BottomBar> {
           //     icon: Icon(FluentSystemIcons.ic_fluent_book_formula_database_regular),
           //     activeIcon: Icon(FluentSystemIcons.ic_fluent_book_formula_database_filled),
           //     label: "Learning"),
-          // BottomNavigationBarItem(
-          //     icon: Icon(FluentSystemIcons.ic_fluent_accessibility_regular),
-          //     activeIcon: Icon(FluentSystemIcons.ic_fluent_accessibility_filled),
-          //     label: "Health",
           // ),
         ],
       ),
