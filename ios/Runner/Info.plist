@@ -53,5 +53,7 @@
 		<string>マイクを利用する理由を記載</string>
 		<key>UIStatusBarHidden</key>
 		<true/>
-	</dict>
+		<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+</dict>
 </plist>

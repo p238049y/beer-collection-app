@@ -23,3 +23,10 @@ DatePeriod getWeekDate(){
 
   return period;
 }
+
+/// 日付を指定のフォーマットに変換するメソッド
+String convertDateFormat(String inputDateTime, String format) {
+  DateTime dateTime = DateTime.parse(inputDateTime); 
+  DateFormat outputFormat = DateFormat(format);
+  return outputFormat.format(dateTime);
+}
