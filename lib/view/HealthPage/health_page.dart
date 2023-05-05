@@ -1,4 +1,5 @@
 import 'package:beer_collection/util/get_week_date.dart';
+import 'package:beer_collection/view/HealthPage/WorkOutAddPage/work_out_add_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'model.dart';
@@ -25,6 +26,21 @@ class HealthPage extends StatelessWidget {
             );
           }
         )
+      ),
+      floatingActionButton: Column(
+        verticalDirection: VerticalDirection.up, // childrenの先頭を下に配置
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          FloatingActionButton(
+            heroTag: 'beerRecordAdd',
+            backgroundColor: Colors.grey,
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const WorkOutAddPage()));
+            },
+            child: const Icon(Icons.add),
+          ),
+        ]
       )
     );
   }
