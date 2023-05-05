@@ -59,6 +59,9 @@ dependencies:
   # スプラッシュ画面の設定のため
   flutter_native_splash: ^2.0.5
 
+  # スワイプして数値を選択する
+  numberpicker: ^2.1.1 
+
 flutter_icons:
   android: "launcher_icon"
   ios: true
