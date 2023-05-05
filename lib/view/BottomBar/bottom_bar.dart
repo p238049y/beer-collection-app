@@ -35,6 +35,10 @@ class _BottomBarState extends State<BottomBar> {
         child: widgetOptions[selectedIndex],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        iconSize: 32,
+        selectedIconTheme: const IconThemeData(
+          size: 40,
+        ),
         currentIndex: selectedIndex,
         onTap: _onItemTapped,
         elevation: 10,
