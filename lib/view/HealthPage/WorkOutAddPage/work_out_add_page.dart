@@ -1,20 +1,200 @@
 
+import 'package:beer_collection/entities/workout.dart';
+import 'package:beer_collection/util/get_week_date.dart';
+import 'package:beer_collection/widgets/common_back_button_widget.dart';
+import 'package:beer_collection/widgets/label_text.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
-class WorkOutAddPage extends StatelessWidget {
+class WorkOutAddPage extends StatefulWidget {
   const WorkOutAddPage({super.key});
+
+  @override
+  State<WorkOutAddPage> createState() => _WorkOutAddPageState();
+}
+
+class _WorkOutAddPageState extends State<WorkOutAddPage> {
+  RequestWorkOut registryWorkOut = RequestWorkOut();
+  final TextEditingController _textEditingController = TextEditingController();
+
+  List<String> workOutTypeList = ['ランニング・ウォーキング', '筋トレ', 'その他'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body : Center(
-        child: TextButton(
-          child: const Text("前のページに戻る"),
-          onPressed: (){
-            Navigator.pop(context);
-          },
-        ),
-      )
+      appBar: const CommonBackButton(),
+      body: Padding(
+        padding: const EdgeInsets.only(right: 16.0, left: 16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const LabelText( labelText: '運動した日付と運動内容を入力してください'),
+              const Gap(16),
+              const LabelText( labelText: '日付を入力してください'),
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelStyle: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                controller: _textEditingController,
+                onTap: () {
+                  _selectDate(context, registryWorkOut);
+                },
+              ),
+              const Gap(16),
+              const LabelText( labelText: '運動の内容を選択してください'),
+              const Gap(8),
+              SizedBox(
+                width: double.infinity,
+                height: 60.0,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: DropdownButton(
+                    underline: Container(
+                      height: 1,
+                      color: Colors.black,
+                    ),
+                    isExpanded: true,
+                    value: registryWorkOut.workOutType,
+                    items: workOutTypeList
+                        .asMap()
+                        .entries
+                        .map((workOut) => DropdownMenuItem(
+                            value: workOut.key, child: Text(workOut.value)))
+                        .toList(),
+                    onChanged: (int? value) {
+                      setState(() {
+                        registryWorkOut.workOutType = value ?? 0;
+                      });
+                    },
+                  ),
+                )
+              ),
+              const Gap(16),
+              Visibility(
+                visible: registryWorkOut.workOutType == 1,
+                child: Column(
+                  children: [
+                  const LabelText( labelText: '負荷の重量を入力してください'),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      suffixIcon: Padding(
+                        padding: EdgeInsets.all(12.0),
+                        child: Text('kg'),
+                      ),
+                      labelStyle: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                    onChanged: (String value) {
+                      setState(() {
+                        registryWorkOut.load = double.parse(value);
+                      });
+                    },
+                  ),
+                  const Gap(16),
+                  const LabelText( labelText: '回数を入力してください'),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      suffixIcon: Padding(
+                        padding: EdgeInsets.all(12.0),
+                        child: Text('回'),
+                      ),
+                      labelStyle: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                    onChanged: (String value) {
+                      setState(() {
+                        registryWorkOut.frequency = int.parse(value);
+                      });
+                    },
+                  ),
+                  ]
+                ),
+              ),
+               Visibility(
+                visible: registryWorkOut.workOutType == 0,
+                child: Column(
+                 children: [
+                    const Gap(16),
+                    const LabelText( labelText: '時間を入力してください'),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        suffixIcon: Padding(
+                          padding: EdgeInsets.all(12.0),
+                          child: Text('秒'),
+                        ),
+                        labelStyle: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                      onChanged: (String value) {
+                        setState(() {
+                          registryWorkOut.time = int.parse(value);
+                        });
+                      },
+                    ),
+                    const Gap(16),
+                    const LabelText( labelText: '移動距離を入力してください'),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        suffixIcon: Padding(
+                          padding: EdgeInsets.all(12.0),
+                          child: Text('km'),
+                        ),
+                        labelStyle: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                      onChanged: (String value) {
+                        setState(() {
+                          registryWorkOut.distance = double.parse(value);
+                        });
+                      },
+                    ),
+                  ],
+                ),
+               ),
+              const Gap(16),
+              SizedBox(
+                width: 200, 
+                height: 50, 
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey,
+                    shape: const StadiumBorder()
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('登録', style: TextStyle(fontSize: 20.0),),
+                ),
+              ),
+            ],
+          )
+        )
+      ),
     );
+  }
+
+    _selectDate(BuildContext context, RequestWorkOut registryWorkOut) async {
+    DateTime selectedDate = DateTime.now();
+    final DateTime? newSelectedDate = await showDatePicker(
+      context: context,
+      locale: const Locale('ja'),
+      initialDate: selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2040),
+    );
+
+    if (newSelectedDate != null && newSelectedDate != selectedDate) {
+      setState(() {
+        selectedDate = newSelectedDate;
+        registryWorkOut.registryDate = dateFormat.format(newSelectedDate);
+      });
+    }
+    _textEditingController.text = dateFormat.format(selectedDate);
   }
 }
