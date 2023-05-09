@@ -1,7 +1,7 @@
-
 import 'package:beer_collection/entities/workout.dart';
 import 'package:beer_collection/util/get_week_date.dart';
 import 'package:beer_collection/widgets/common_back_button_widget.dart';
+import 'package:beer_collection/widgets/error_message.dart';
 import 'package:beer_collection/widgets/label_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -42,6 +42,7 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
                   _selectDate(context, registryWorkOut);
                 },
               ),
+              const ErrorMessage(errorMessage: '日付が未選択です。日付を選択してください。'),
               const Gap(16),
               const LabelText( labelText: '運動の内容を選択してください'),
               const Gap(8),
@@ -71,6 +72,7 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
                   ),
                 )
               ),
+              const ErrorMessage(errorMessage: '運動の内容が未選択です。運動の内容を選択してください。'),
               const Gap(16),
               Visibility(
                 visible: registryWorkOut.workOutType == 1,
@@ -93,6 +95,7 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
                       });
                     },
                   ),
+                  const ErrorMessage(errorMessage: '負荷の重量が未入力です。負荷の重量を入力してください。'),
                   const Gap(16),
                   const LabelText( labelText: '回数を入力してください'),
                   TextFormField(
@@ -111,6 +114,7 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
                       });
                     },
                   ),
+                  const ErrorMessage(errorMessage: '回数が未入力です。回数を入力してください。'),
                   ]
                 ),
               ),
@@ -136,6 +140,7 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
                         });
                       },
                     ),
+                    const ErrorMessage(errorMessage: '時間が未入力です。時間を入力してください。'),
                     const Gap(16),
                     const LabelText( labelText: '移動距離を入力してください'),
                     TextFormField(
@@ -154,9 +159,10 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
                         });
                       },
                     ),
+                    const ErrorMessage(errorMessage: '移動距離が未入力です。移動距離を入力してください。'),
                   ],
                 ),
-               ),
+              ),
               const Gap(16),
               SizedBox(
                 width: 200, 
