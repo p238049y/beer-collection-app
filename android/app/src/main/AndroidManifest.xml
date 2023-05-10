@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.github.p2388049y.beer_collection">
+    <uses-permission android:name="android.permission.CAMERA" />
    <application
         android:label="Beer Collection"
         android:name="${applicationName}"
