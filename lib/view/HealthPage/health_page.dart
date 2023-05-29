@@ -1,47 +1,186 @@
+import 'package:beer_collection/util/app_styles.dart';
 import 'package:beer_collection/util/get_week_date.dart';
 import 'package:beer_collection/view/HealthPage/WorkOutAddPage/work_out_add_page.dart';
+import 'package:beer_collection/view/HealthPage/model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'model.dart';
+import 'package:gap/gap.dart';
 
-class HealthPage extends StatelessWidget {
-  const HealthPage({Key? key}) : super(key: key);
-  
+class HealthPage extends StatefulWidget {
+  const HealthPage({super.key});
+
+  @override
+  State<HealthPage> createState() => _HealthPageState();
+}
+
+class _HealthPageState extends State<HealthPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body : Scaffold(
-        body: ListView.builder(
-          itemCount: healthList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Card(
-              child: Slidable(
-                child: ListTile(
-                  minLeadingWidth: 120.0,
-                  leading: convertTypeToIcon(healthList[index]['workOutType']),
-                  title: Text(convertDateFormat(healthList[index]['registryDate'], 'yyyy/MM/dd'), maxLines: 1, overflow: TextOverflow.ellipsis),
-                  trailing: Text('${healthList[index]['calorie']}kcal', maxLines: 1, overflow: TextOverflow.ellipsis),
-                ),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+          colors: [Styles.fitnessColor, Styles.orangeColor],
+          begin: const FractionalOffset(0.0, 0.4),
+          end: Alignment.topRight,
+        )),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.only(top: 32, left: 16, right: 16),
+              width: MediaQuery.of(context).size.width,
+              height: 300,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(child: Container()),
+                        IconButton(
+                          icon:
+                              Icon(Icons.add, size: 30, color: Styles.bgColor),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const WorkOutAddPage()));
+                          },
+                        ),
+                      ],
+                    ),
+                    const Gap(8),
+                    Text('ワークアウト',
+                        style: TextStyle(
+                            fontSize: 25,
+                            color: Styles.bgColor,
+                            fontWeight: FontWeight.bold)),
+                    const Gap(50),
+                    Row(
+                      children: [
+                        Container(
+                          width: 150,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            gradient: LinearGradient(
+                                colors: [
+                                  Styles.fitnessColor,
+                                  Styles.fitnessColor.withOpacity(0.5)
+                                ],
+                                begin: Alignment.bottomLeft,
+                                end: Alignment.topRight),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.local_fire_department,
+                                size: 20,
+                                color: Styles.bgColor,
+                              ),
+                              const Gap(5),
+                              Text('2000 kcal',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: Styles.bgColor,
+                                      fontWeight: FontWeight.bold)),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Gap(50),
+                  ]),
+            ),
+            Expanded(
+                child: Container(
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius:
+                      BorderRadius.only(topRight: Radius.circular(70))),
+              child: Column(
+                children: [
+                  const Gap(30),
+                  Row(
+                    children: const [
+                      Gap(20),
+                      Text('これまでの記録',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black)),
+                      Gap(20),
+                    ],
+                  ),
+                  const Gap(20),
+                  Expanded(
+                      child: ListView.builder(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 8),
+                          itemCount: healthList.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return GestureDetector(
+                              child: SizedBox(
+                                height: 90,
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                            width: 80,
+                                            height: 80,
+                                            child: convertTypeToIcon(
+                                                healthList[index]
+                                                    ['workOutType'])),
+                                        const Gap(10),
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              '${healthList[index]['calorie']}kcal',
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: const TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            const Gap(5),
+                                            Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 3),
+                                                child: Text(
+                                                    convertDateFormat(
+                                                        healthList[index]
+                                                            ['registryDate'],
+                                                        'yyyy/MM/dd'),
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                      color: Colors.grey[500],
+                                                    ))),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Divider(
+                                      height: 1,
+                                      thickness: 1.5,
+                                      indent: 20,
+                                      endIndent: 20,
+                                      color: Colors.grey[400],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }))
+                ],
               ),
-            );
-          }
-        )
+            ))
+          ],
+        ),
       ),
-      floatingActionButton: Column(
-        verticalDirection: VerticalDirection.up, // childrenの先頭を下に配置
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          FloatingActionButton(
-            heroTag: 'beerRecordAdd',
-            backgroundColor: Colors.grey,
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const WorkOutAddPage()));
-            },
-            child: const Icon(Icons.add),
-          ),
-        ]
-      )
     );
   }
 }
