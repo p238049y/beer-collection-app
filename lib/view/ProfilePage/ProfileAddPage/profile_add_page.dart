@@ -35,27 +35,26 @@ class _ProfileAddPageState extends State<ProfileAddPage> {
             child: Column(
               children: [
                 Center(
-                  child: Container(
-                      width: 350,
-                      height: 250,
-                      decoration: BoxDecoration(
-                        color: Colors.blueGrey[100],
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Icon(
-                        Icons.person,
-                        size: 200,
-                      ),
-                    )),
+                    child: Container(
+                  width: 350,
+                  height: 250,
+                  decoration: BoxDecoration(
+                    color: Colors.blueGrey[100],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Icon(
+                    Icons.person,
+                    size: 200,
+                  ),
+                )),
                 const Gap(16),
                 TextFormField(
                   decoration: const InputDecoration(
-                    labelText: '名前',
-                    labelStyle: TextStyle(
-                      fontSize: 20,
-                    ),
-                    border: OutlineInputBorder()
-                  ),
+                      labelText: '名前',
+                      labelStyle: TextStyle(
+                        fontSize: 20,
+                      ),
+                      border: OutlineInputBorder()),
                   onChanged: (String value) {
                     setState(() {
                       registryUser.userName = value;
