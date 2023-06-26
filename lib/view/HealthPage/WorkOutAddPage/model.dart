@@ -80,6 +80,7 @@ class RequestWorkOutValidate {
   }
 }
 
-void registerWorkOut(RequestWorkOut registryWorkOut) {
+void registerWorkOut(RequestWorkOut registryWorkOut) async {
   // データ登録の処理
+  await WorkOutDbProvider.insertUserData(registryWorkOut);
 }

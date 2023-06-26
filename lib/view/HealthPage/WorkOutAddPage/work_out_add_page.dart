@@ -1,4 +1,5 @@
 import 'package:beer_collection/entities/workout.dart';
+import 'package:beer_collection/repository/workout/workout.dart';
 import 'package:beer_collection/util/get_week_date.dart';
 import 'package:beer_collection/view/HealthPage/WorkOutAddPage/model.dart';
 import 'package:beer_collection/widgets/common_back_button_widget.dart';
@@ -20,6 +21,17 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
   final TextEditingController _textEditingController = TextEditingController();
 
   List<String> workOutTypeList = ['ランニング・ウォーキング', '筋トレ', 'その他'];
+
+  Future<void> initDb() async {
+    await WorkOutDbProvider.setDb();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initDb();
+  }
 
   @override
   Widget build(BuildContext context) {

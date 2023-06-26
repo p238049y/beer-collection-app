@@ -26,15 +26,19 @@ class WorkOutDbProvider {
   }
 
   static Future<void> insertUserData(RequestWorkOut workOut) async {
-    await database!.insert(tableName, {
-      'work_out_type': workOut.workOutType,
-      'registry_date': workOut.registryDate,
-      'calorie': workOut.calorie,
-      'load': workOut.load,
-      'frequency': workOut.frequency,
-      'time': workOut.time,
-      'distance': workOut.distance,
-    });
+    await database!.insert(
+      tableName,
+      {
+        'work_out_type': workOut.workOutType,
+        'registry_date': workOut.registryDate,
+        'calorie': workOut.calorie,
+        'load': workOut.load,
+        'frequency': workOut.frequency,
+        'time': workOut.time,
+        'distance': workOut.distance,
+      },
+      conflictAlgorithm: ConflictAlgorithm.rollback,
+    );
   }
 
   static Future<List<WorkOutView>> getWorkOutList() async {
