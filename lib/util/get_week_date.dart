@@ -10,7 +10,7 @@ class DatePeriod {
   DatePeriod(this.startDate, this.endDate);
 }
 
-DatePeriod getWeekDate(){
+DatePeriod getWeekDate() {
   DateTime today = DateTime.now();
 
   ///日曜日: 0, 土曜日: 6
@@ -19,14 +19,15 @@ DatePeriod getWeekDate(){
   DateTime startDate = today.subtract(Duration(days: weekdayToday));
   DateTime endDate = startDate.add(const Duration(days: 6));
 
-  DatePeriod period = DatePeriod(dateFormat.format(startDate), dateFormat.format(endDate));
+  DatePeriod period =
+      DatePeriod(dateFormat.format(startDate), dateFormat.format(endDate));
 
   return period;
 }
 
 /// 日付を指定のフォーマットに変換するメソッド
 String convertDateFormat(String inputDateTime, String format) {
-  DateTime dateTime = DateTime.parse(inputDateTime); 
   DateFormat outputFormat = DateFormat(format);
+  DateTime dateTime = outputFormat.parse(inputDateTime);
   return outputFormat.format(dateTime);
 }
