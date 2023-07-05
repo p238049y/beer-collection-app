@@ -2,7 +2,7 @@ class WorkOutView {
   int id = -1;
   int workOutType = -1;
   String registryDate = '';
-  int calorie = 0;
+  double calorie = 0.0;
 
   WorkOutView(this.id, this.workOutType, this.registryDate, this.calorie);
 }
@@ -11,7 +11,7 @@ class WorkOutDetailView {
   int id = -1;
   int workOutType = -1;
   String registryDate = '';
-  int calorie = -1;
+  double calorie = 0.0;
   double load = 0.0;
   int frequency = -1;
   int time = -1;
@@ -24,7 +24,7 @@ class WorkOutDetailView {
 class RequestWorkOut {
   int? workOutType;
   String registryDate;
-  int calorie;
+  double calorie = 0.0;
   double? load;
   int? frequency;
   int? time;

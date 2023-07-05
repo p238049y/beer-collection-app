@@ -43,7 +43,7 @@ class WorkOutDbProvider {
 
   static Future<List<WorkOutView>> getWorkOutList() async {
     final List<Map<String, dynamic>> workOutMap =
-        await database!.query(tableName);
+        await database?.query(tableName) ?? [];
 
     if (workOutMap.isEmpty) {
       return [];
