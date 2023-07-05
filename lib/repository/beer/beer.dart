@@ -37,7 +37,8 @@ class DbProvider {
   }
 
   static Future<List<BeerView>> getBeerList() async {
-    final List<Map<String, dynamic>> beerMap = await database!.query(tableName);
+    final List<Map<String, dynamic>> beerMap =
+        await database?.query(tableName) ?? [];
 
     if (beerMap.isEmpty) {
       return [];
