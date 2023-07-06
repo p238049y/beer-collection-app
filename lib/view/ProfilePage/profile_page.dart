@@ -14,23 +14,16 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  List<UserView> userList = [];
   UserView userDate = UserView(0, '未登録', 0, 0);
 
   Future<void> initDb() async {
     await UserDbProvider.setDb();
-    userList = await UserDbProvider.getUserData();
-    if (userList.isNotEmpty) {
-      userDate = userList[0];
-    }
+    userDate = await UserDbProvider.getUserData();
     setState(() {});
   }
 
   Future<void> reBuild() async {
-    userList = await UserDbProvider.getUserData();
-    if (userList.isNotEmpty) {
-      userDate = userList[0];
-    }
+    userDate = await UserDbProvider.getUserData();
     setState(() {});
   }
 
@@ -59,7 +52,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     icon: const Icon(Icons.create),
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ProfileEditPage(userDate: userDate)));
+                          builder: (context) =>
+                              ProfileEditPage(userDate: userDate)));
                     },
                   ),
                 ],

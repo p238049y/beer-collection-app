@@ -33,11 +33,11 @@ class UserDbProvider {
     });
   }
 
-  static Future<List<UserView>> getUserData() async {
+  static Future<UserView> getUserData() async {
     final List<Map<String, dynamic>> userMap = await database!.query(tableName);
 
     if (userMap.isEmpty) {
-      return [];
+      return UserView(-1, '', 0.0, 0.0);
     } else {
       List<UserView> userList = List.generate(
           userMap.length,
@@ -47,7 +47,7 @@ class UserDbProvider {
                 userMap[index]['height'],
                 userMap[index]['weight'],
               ));
-      return userList;
+      return userList.first;
     }
   }
 
