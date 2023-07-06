@@ -37,45 +37,45 @@ class _BeerListPageState extends State<BeerListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CommonBackButton(),
-      body :Scaffold(
-        body: ListView.builder(
-      // NOTE: https://qiita.com/code-cutlass/items/3a8b759056db1e8f7639
-      // ListViewやGridViewを入れ子にして、表示やリストのスクロールを可能にするための設定
-      itemCount: beerList.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Card(
-            child: Slidable(
-                endActionPane: ActionPane(
-                  extentRatio: 0.25,
-                  motion: const ScrollMotion(),
-                  children: [
-                    SlidableAction(
-                      onPressed: (value) async {
-                        await DbProvider.deleteData(beerList[index].id);
-                        reBuild();
-                      },
-                      backgroundColor: Colors.red,
-                      foregroundColor: Colors.white,
-                      icon: Icons.delete,
-                      label: '削除',
+        appBar: const CommonBackButton(),
+        body: Scaffold(
+            body: ListView.builder(
+          // NOTE: https://qiita.com/code-cutlass/items/3a8b759056db1e8f7639
+          // ListViewやGridViewを入れ子にして、表示やリストのスクロールを可能にするための設定
+          itemCount: beerList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Card(
+                child: Slidable(
+                    endActionPane: ActionPane(
+                      extentRatio: 0.25,
+                      motion: const ScrollMotion(),
+                      children: [
+                        SlidableAction(
+                          onPressed: (value) async {
+                            await DbProvider.deleteData(beerList[index].id);
+                            reBuild();
+                          },
+                          backgroundColor: Colors.red,
+                          foregroundColor: Colors.white,
+                          icon: Icons.delete,
+                          label: '削除',
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                child: ListTile(
-                  minLeadingWidth: 120.0,
-                  leading: Image.file(File(beerList[index].image)),
-                  title: Text(beerList[index].beerName, maxLines: 1, overflow: TextOverflow.ellipsis),
-                  subtitle: Text(beerList[index].registryDateTime),
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>
-                          BeerRecordDetailPage(beerId: beerList[index].id),
-                    ));
-                  },
-                )));
-      },
-    ))
-    );
+                    child: ListTile(
+                      minLeadingWidth: 120.0,
+                      leading: Image.file(File(beerList[index].image)),
+                      title: Text(beerList[index].beerName,
+                          maxLines: 1, overflow: TextOverflow.ellipsis),
+                      subtitle: Text(beerList[index].registryDateTime),
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              BeerRecordDetailPage(beerId: beerList[index].id),
+                        ));
+                      },
+                    )));
+          },
+        )));
   }
 }
