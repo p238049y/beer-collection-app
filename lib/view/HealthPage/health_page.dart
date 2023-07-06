@@ -1,3 +1,5 @@
+import 'package:beer_collection/entities/workout.dart';
+import 'package:beer_collection/repository/workout/workout.dart';
 import 'package:beer_collection/util/app_styles.dart';
 import 'package:beer_collection/util/get_week_date.dart';
 import 'package:beer_collection/view/HealthPage/WorkOutAddPage/work_out_add_page.dart';
@@ -13,10 +15,31 @@ class HealthPage extends StatefulWidget {
 }
 
 class _HealthPageState extends State<HealthPage> {
+  List<WorkOutView> workOutList = [];
+
+  Future<void> initDb() async {
+    await WorkOutDbProvider.setDb();
+    workOutList = await WorkOutDbProvider.getWorkOutList();
+    setState(() {});
+  }
+
+  Future<void> reBuild() async {
+    workOutList = await WorkOutDbProvider.getWorkOutList();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initDb();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+        body: FutureBuilder(
+      future: reBuild(),
+      builder: (context, snapshot) => Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
           colors: [Styles.fitnessColor, Styles.orangeColor],
@@ -114,7 +137,7 @@ class _HealthPageState extends State<HealthPage> {
                       child: ListView.builder(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 8, vertical: 8),
-                          itemCount: healthList.length,
+                          itemCount: workOutList.length,
                           itemBuilder: (BuildContext context, int index) {
                             return GestureDetector(
                               child: SizedBox(
@@ -127,8 +150,8 @@ class _HealthPageState extends State<HealthPage> {
                                             width: 80,
                                             height: 80,
                                             child: convertTypeToIcon(
-                                                healthList[index]
-                                                    ['workOutType'])),
+                                                workOutList[index]
+                                                    .workOutType)),
                                         const Gap(10),
                                         Column(
                                           mainAxisAlignment:
@@ -137,7 +160,7 @@ class _HealthPageState extends State<HealthPage> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              '${healthList[index]['calorie']}kcal',
+                                              '${workOutList[index].calorie}kcal',
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                               style: const TextStyle(
@@ -150,8 +173,8 @@ class _HealthPageState extends State<HealthPage> {
                                                     top: 3),
                                                 child: Text(
                                                     convertDateFormat(
-                                                        healthList[index]
-                                                            ['registryDate'],
+                                                        workOutList[index]
+                                                            .registryDate,
                                                         'yyyy/MM/dd'),
                                                     maxLines: 1,
                                                     overflow:
@@ -181,6 +204,6 @@ class _HealthPageState extends State<HealthPage> {
           ],
         ),
       ),
-    );
+    ));
   }
 }
