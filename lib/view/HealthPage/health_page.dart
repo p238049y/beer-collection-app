@@ -160,7 +160,7 @@ class _HealthPageState extends State<HealthPage> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              '${workOutList[index].calorie}kcal',
+                                              '${workOutList[index].calorie.toStringAsFixed(2)}kcal',
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                               style: const TextStyle(
