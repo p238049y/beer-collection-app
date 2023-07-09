@@ -29,7 +29,6 @@ class _HomePageState extends State<HomePage> {
   int walkingTime = 0;
   int runningTime = 0;
 
-  List<UserView> userList = [];
   UserView userData = UserView(0, '未登録', 0, 0);
 
   Future<void> initDb() async {
@@ -41,13 +40,10 @@ class _HomePageState extends State<HomePage> {
     }
 
     await UserDbProvider.setDb();
-    userList = await UserDbProvider.getUserData();
-    if (userList.isNotEmpty) {
-      userData = userList[0];
-      sumCalorie = getSumCalorie(weeklyBeerList);
-      walkingTime = calcCaloriesBurnedTime(1, userData.weight, sumCalorie);
-      runningTime = calcCaloriesBurnedTime(2, userData.weight, sumCalorie);
-    }
+    userData = await UserDbProvider.getUserData();
+    sumCalorie = getSumCalorie(weeklyBeerList);
+    walkingTime = calcCaloriesBurnedTime(1, userData.weight, sumCalorie);
+    runningTime = calcCaloriesBurnedTime(2, userData.weight, sumCalorie);
 
     setState(() {});
   }
@@ -90,16 +86,16 @@ class _HomePageState extends State<HomePage> {
                         Visibility(
                           visible: beerList.isNotEmpty,
                           child: InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const BeerListPage()));
-                          },
-                          child: Text(
-                            "View all > ",
-                            style: Styles.textStyle
-                                .copyWith(color: Styles.primaryColor),
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const BeerListPage()));
+                            },
+                            child: Text(
+                              "View all > ",
+                              style: Styles.textStyle
+                                  .copyWith(color: Styles.primaryColor),
+                            ),
                           ),
-                        ),
                         ),
                       ],
                     ),
@@ -108,13 +104,13 @@ class _HomePageState extends State<HomePage> {
                   SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       padding: const EdgeInsets.only(left: 20),
-                      child: beerList.isEmpty ? 
-                      const GuideScreen() : 
-                      Row(
-                        children: beerList
-                            .map((beer) => BeerScreen(beer: beer))
-                            .toList(),
-                      )),
+                      child: beerList.isEmpty
+                          ? const GuideScreen()
+                          : Row(
+                              children: beerList
+                                  .map((beer) => BeerScreen(beer: beer))
+                                  .toList(),
+                            )),
                   const Gap(15),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -141,7 +137,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   const Gap(8),
-                  SummaryScreen(weeklyBeerList: weeklyBeerList, sumCalorie: sumCalorie, walkingTime: walkingTime, runningTime: runningTime),
+                  SummaryScreen(
+                      weeklyBeerList: weeklyBeerList,
+                      sumCalorie: sumCalorie,
+                      walkingTime: walkingTime,
+                      runningTime: runningTime),
                 ],
               ),
             );

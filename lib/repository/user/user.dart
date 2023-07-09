@@ -33,11 +33,11 @@ class UserDbProvider {
     });
   }
 
-  static Future<List<UserView>> getUserData() async {
+  static Future<UserView> getUserData() async {
     final List<Map<String, dynamic>> userMap = await database!.query(tableName);
 
     if (userMap.isEmpty) {
-      return [];
+      return UserView(-1, '', 0.0, 0.0);
     } else {
       List<UserView> userList = List.generate(
           userMap.length,
@@ -47,18 +47,19 @@ class UserDbProvider {
                 userMap[index]['height'],
                 userMap[index]['weight'],
               ));
-      return userList;
+      return userList.first;
     }
   }
 
   static Future<void> updateUserData(UserView user) async {
-    await database!.update(tableName,  {
-      'user_name': user.userName,
-      'height': user.height,
-      'weight': user.weight,
-    }, 
-      where: 'id = ?',
-      whereArgs: [user.id]
-    );
+    await database!.update(
+        tableName,
+        {
+          'user_name': user.userName,
+          'height': user.height,
+          'weight': user.weight,
+        },
+        where: 'id = ?',
+        whereArgs: [user.id]);
   }
 }
