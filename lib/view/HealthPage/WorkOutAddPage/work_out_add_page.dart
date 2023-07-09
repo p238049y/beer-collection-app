@@ -185,6 +185,31 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
                   ],
                 ),
               ),
+              Visibility(
+                visible: registryWorkOut.workOutType == 2,
+                child: Column(
+                  children: [
+                    const Gap(16),
+                    const LabelText(labelText: '消費カロリーを入力してください'),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        suffixIcon: Padding(
+                          padding: EdgeInsets.all(12.0),
+                          child: Text('kcal'),
+                        ),
+                        labelStyle: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                      onChanged: (String value) {
+                        setState(() {
+                          registryWorkOut.calorie = double.parse(value);
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
               const Gap(16),
               SizedBox(
                 width: 200,
