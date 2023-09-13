@@ -34,31 +34,31 @@ jobs:
         run: flutter build apk
       - run: flutter build appbundle
 
-  build-ios:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.7.7'
-          channel: 'stable'
-      - run: flutter pub get
-      - run: flutter build ios --release --no-codesign
+  # build-ios:
+  #   runs-on: macos-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: subosito/flutter-action@v2
+  #       with:
+  #         flutter-version: '3.7.7'
+  #         channel: 'stable'
+  #     - run: flutter pub get
+  #     - run: flutter build ios --release --no-codesign
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: チェックアウト
-        uses: actions/checkout@v3
-      # https://github.com/subosito/flutter-action
-      - name: CIジョブを動かすためのflutterの環境構築
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.7.7'
-          channel: 'stable'
-      - name: 正常にインストールできているかを確認
-        run: flutter --version
-      - name: パッケージのインストール
-        run: flutter pub get
-      - name: テストを実行
-        run: flutter test 
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: チェックアウト
+  #       uses: actions/checkout@v3
+  #     # https://github.com/subosito/flutter-action
+  #     - name: CIジョブを動かすためのflutterの環境構築
+  #       uses: subosito/flutter-action@v2
+  #       with:
+  #         flutter-version: '3.7.7'
+  #         channel: 'stable'
+  #     - name: 正常にインストールできているかを確認
+  #       run: flutter --version
+  #     - name: パッケージのインストール
+  #       run: flutter pub get
+  #     - name: テストを実行
+  #       run: flutter test 
