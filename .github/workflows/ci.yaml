@@ -9,6 +9,7 @@ on:
       - '**.md'
 
 jobs:
+  # Androidのビルドジョブ
   build-android:
     runs-on: ubuntu-latest
 
