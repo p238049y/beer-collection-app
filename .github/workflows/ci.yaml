@@ -48,5 +48,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: チェックアウト
+        uses: actions/checkout@v3
+      # https://github.com/subosito/flutter-action
+      - name: CIジョブを動かすためのflutterの環境構築
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.7.7'
+          channel: 'stable'
+      - name: 正常にインストールできているかを確認
+        run: flutter --version
+      - name: パッケージのインストール
+        run: flutter pub get
       - name: テストを実行
         run: flutter test 
