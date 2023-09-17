@@ -32,7 +32,12 @@ jobs:
       - name: パッケージのインストール
         run: flutter pub get
       - name: Androidの成果物をビルド
-        run: flutter build apk
+        run: |  
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > app/key.jks
+          export KEYSTORE_PASSWORD="${{ secrets.KEYSTORE_PASSWORD }}"
+          export KEY_ALIAS="${{ secrets.KEY_ALIAS }}"
+          export KEY_PASSWORD="${{ secrets.KEY_PASSWORD }}"
+          flutter build apk
       - run: flutter build appbundle
 
 
