@@ -12,6 +12,7 @@ jobs:
   # Androidのビルドジョブ
   build-android:
     runs-on: ubuntu-latest
+    environment: production
 
     steps:
       - name: チェックアウト
@@ -33,7 +34,7 @@ jobs:
         run: flutter pub get
       - name: Androidの成果物をビルド
         run: |  
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > release.keystore   
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > ./android/app/release.keystore   
           export KEYSTORE_PASSWORD="${{ secrets.KEYSTORE_PASSWORD }}"
           export KEY_ALIAS="${{ secrets.KEY_ALIAS }}"
           export KEY_PASSWORD="${{ secrets.KEY_PASSWORD }}"
