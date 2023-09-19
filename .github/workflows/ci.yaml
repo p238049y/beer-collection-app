@@ -39,7 +39,7 @@ jobs:
           export KEY_ALIAS="${{ secrets.KEY_ALIAS }}"
           export KEY_PASSWORD="${{ secrets.KEY_PASSWORD }}"
           flutter build apk
-      - run: flutter build appbundle
+      # - run: flutter build appbundle
 
 
   # build-ios:
@@ -70,3 +70,12 @@ jobs:
   #       run: flutter pub get
   #     - name: テストを実行
   #       run: flutter test 
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 成果物をアップロードする
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: android
+          path: build/app/outputs/flutter-apk/app-release.apk
