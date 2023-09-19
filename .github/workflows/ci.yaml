@@ -39,6 +39,7 @@ jobs:
           export KEY_ALIAS="${{ secrets.KEY_ALIAS }}"
           export KEY_PASSWORD="${{ secrets.KEY_PASSWORD }}"
           flutter build apk
+          flutter build appbundle
       # - run: flutter build appbundle
 
 
