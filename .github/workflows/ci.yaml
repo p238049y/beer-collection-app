@@ -93,7 +93,6 @@ jobs:
           export KEY_ALIAS="${{ secrets.KEY_ALIAS }}"
           export KEY_PASSWORD="${{ secrets.KEY_PASSWORD }}"
           export KEYSTORE_PASSWORD="${{ secrets.KEYSTORE_PASSWORD }}"
-          cat ./android/key.properties
           flutter build appbundle
       - name: Upload to GooglePlayStore
         run: ./gradlew publishReleaseBundle
