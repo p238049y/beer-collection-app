@@ -95,8 +95,7 @@ jobs:
           echo 'keyPassword=${{ secrets.KEY_PASSWORD }}' >> ./android/key.properties
           echo 'keyAlias=${{ secrets.KEY_ALIAS  }}' >> ./android/key.properties
           cat ./android/key.properties
-      - name: Building Android AppBundle
-        run: flutter build appbundle --build-number ${GITHUB_RUN_NUMBER}
+          run: flutter build appbundle --build-number ${GITHUB_RUN_NUMBER}
       - name: Upload to GooglePlayStore
         run: ./gradlew publishReleaseBundle
         working-directory: ./android
