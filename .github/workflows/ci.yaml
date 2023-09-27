@@ -96,4 +96,5 @@ jobs:
           flutter build appbundle
       - name: Upload to GooglePlayStore
         run: ./gradlew publishReleaseBundle
-        working-directory: build/app/outputs/apk/release
+        # working-directory: build/app/outputs/apk/release
+        working-directory: ./android
