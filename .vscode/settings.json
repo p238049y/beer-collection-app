@@ -13,4 +13,5 @@
         "editor.defaultFormatter": "Dart-Code.dart-code",
         "editor.formatOnPaste": true
     },
+    "java.configuration.updateBuildConfiguration": "interactive",
 }

@@ -82,4 +82,8 @@ class WorkOutDbProvider {
       return workOutList.first;
     }
   }
+
+  static Future<void> deleteData(int id) async {
+    await database!.delete(tableName, where: 'id = ?', whereArgs: [id]);
+  }
 }
