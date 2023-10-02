@@ -10,34 +10,34 @@ on:
 
 jobs:
   # Androidのビルドジョブ
-  # build-android:
-  #   runs-on: ubuntu-latest
-  #   environment: production
+  build-android:
+    runs-on: ubuntu-latest
+    environment: production
 
-  #   steps:
-  #     - name: チェックアウト
-  #       uses: actions/checkout@v3
-  #     - name: CIジョブを動かすためのflutterの環境構築
-  #       uses: subosito/flutter-action@v2
-  #       with:
-  #         flutter-version: '3.7.7'
-  #         channel: 'stable'
-  #     - name: CIジョブを動かすためのJavaの環境構築
-  #       uses: actions/setup-java@v2
-  #       with:
-  #         distribution: 'zulu'
-  #         java-version: '12.x'
-  #     - name: 正常にインストールできているかを確認
-  #       run: flutter --version
-  #     - name: パッケージのインストール
-  #       run: flutter pub get
-  #     - name: Androidの成果物をビルド
-  #       run: |  
-  #         echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > ./android/app/release.keystore   
-  #         export KEYSTORE_PASSWORD="${{ secrets.KEYSTORE_PASSWORD }}"
-  #         export KEY_ALIAS="${{ secrets.KEY_ALIAS }}"
-  #         export KEY_PASSWORD="${{ secrets.KEY_PASSWORD }}"
-  #         flutter build apk
+    steps:
+      - name: チェックアウト
+        uses: actions/checkout@v3
+      - name: CIジョブを動かすためのflutterの環境構築
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.7.7'
+          channel: 'stable'
+      - name: CIジョブを動かすためのJavaの環境構築
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '12.x'
+      - name: 正常にインストールできているかを確認
+        run: flutter --version
+      - name: パッケージのインストール
+        run: flutter pub get
+      - name: Androidの成果物をビルド
+        run: |  
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > ./android/app/release.keystore   
+          export KEYSTORE_PASSWORD="${{ secrets.KEYSTORE_PASSWORD }}"
+          export KEY_ALIAS="${{ secrets.KEY_ALIAS }}"
+          export KEY_PASSWORD="${{ secrets.KEY_PASSWORD }}"
+          flutter build apk
 
   # build-ios:
   #   runs-on: macos-latest
@@ -68,32 +68,32 @@ jobs:
   #     - name: テストを実行
   #       run: flutter test 
 
-  deploy:
-    runs-on: ubuntu-latest
-    environment: production
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   environment: production
 
-    steps:
-      - name: Checks-out my repository
-        uses: actions/checkout@v2
-      - name: CIジョブを動かすためのflutterの環境構築
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.7.7'
-          channel: 'stable'
-      - name: パッケージのインストール
-        run: flutter pub get
-      - name: release.keystoreを作成
-        run: echo -n ${{ secrets.KEYSTORE_BASE64 }} | base64 -d > ./android/app/release.keystore
-      - name: service-account-key.jsonを作成
-        run: echo -n ${{ secrets.SERVICE_ACCOUNT_KEY_JSON }} | base64 -d > ./android/service-account-key.json
-      - name: Androidの成果物をビルド
-        run: |  
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > ./android/app/release.keystore  
-          echo "${{ secrets.SERVICE_ACCOUNT_KEY_JSON }}" > ./android/service-account-key.json
-          export KEY_ALIAS="${{ secrets.KEY_ALIAS }}"
-          export KEY_PASSWORD="${{ secrets.KEY_PASSWORD }}"
-          export KEYSTORE_PASSWORD="${{ secrets.KEYSTORE_PASSWORD }}"
-          flutter build appbundle
-      - name: Upload to GooglePlayStore
-        run: ./gradlew publishReleaseBundle
-        working-directory: ./android
+  #   steps:
+  #     - name: Checks-out my repository
+  #       uses: actions/checkout@v2
+  #     - name: CIジョブを動かすためのflutterの環境構築
+  #       uses: subosito/flutter-action@v2
+  #       with:
+  #         flutter-version: '3.7.7'
+  #         channel: 'stable'
+  #     - name: パッケージのインストール
+  #       run: flutter pub get
+  #     - name: release.keystoreを作成
+  #       run: echo -n ${{ secrets.KEYSTORE_BASE64 }} | base64 -d > ./android/app/release.keystore
+  #     - name: service-account-key.jsonを作成
+  #       run: echo -n ${{ secrets.SERVICE_ACCOUNT_KEY_JSON }} | base64 -d > ./android/service-account-key.json
+  #     - name: Androidの成果物をビルド
+  #       run: |  
+  #         echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > ./android/app/release.keystore  
+  #         echo "${{ secrets.SERVICE_ACCOUNT_KEY_JSON }}" > ./android/service-account-key.json
+  #         export KEY_ALIAS="${{ secrets.KEY_ALIAS }}"
+  #         export KEY_PASSWORD="${{ secrets.KEY_PASSWORD }}"
+  #         export KEYSTORE_PASSWORD="${{ secrets.KEYSTORE_PASSWORD }}"
+  #         flutter build appbundle
+  #     - name: Upload to GooglePlayStore
+  #       run: ./gradlew publishReleaseBundle
+  #       working-directory: ./android
