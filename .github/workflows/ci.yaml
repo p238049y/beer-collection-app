@@ -94,7 +94,9 @@ jobs:
           export KEY_PASSWORD="${{ secrets.KEY_PASSWORD }}"
           export KEYSTORE_PASSWORD="${{ secrets.KEYSTORE_PASSWORD }}"
           flutter build appbundle
-      - name: Upload to GooglePlayStore
-        run: ./gradlew publishReleaseBundle
-        # working-directory: build/app/outputs/apk/release
+          ./gradlew publishReleaseBundle
         working-directory: ./android
+      # - name: Upload to GooglePlayStore
+      #   run: ./gradlew publishReleaseBundle
+      #   # working-directory: build/app/outputs/apk/release
+      #   working-directory: ./android
