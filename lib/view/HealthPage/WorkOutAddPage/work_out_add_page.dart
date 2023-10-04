@@ -1,3 +1,4 @@
+import 'package:beer_collection/config/workOut.dart';
 import 'package:beer_collection/entities/workout.dart';
 import 'package:beer_collection/repository/workout/workout.dart';
 import 'package:beer_collection/util/get_week_date.dart';
@@ -19,8 +20,6 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
   RequestWorkOut registryWorkOut = RequestWorkOut();
   RequestWorkOutValidate requestWorkOutValidate = RequestWorkOutValidate();
   final TextEditingController _textEditingController = TextEditingController();
-
-  List<String> workOutTypeList = ['ランニング・ウォーキング', '筋トレ', 'その他'];
 
   Future<void> initDb() async {
     await WorkOutDbProvider.setDb();
