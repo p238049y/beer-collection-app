@@ -3,6 +3,7 @@ import 'package:beer_collection/repository/workout/workout.dart';
 import 'package:beer_collection/util/app_styles.dart';
 import 'package:beer_collection/util/get_week_date.dart';
 import 'package:beer_collection/view/HealthPage/WorkOutAddPage/work_out_add_page.dart';
+import 'package:beer_collection/view/HealthPage/WorkOutDetailPage/work_out_detail_page.dart';
 import 'package:beer_collection/view/HealthPage/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -134,85 +135,7 @@ class _HealthPageState extends State<HealthPage> {
                     ],
                   ),
                   const Gap(20),
-                  Expanded(
-                      child: ListView.builder(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 8),
-                          itemCount: workOutList.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Card(
-                                child: Slidable(
-                                    endActionPane: ActionPane(
-                                      extentRatio: 0.25,
-                                      motion: const ScrollMotion(),
-                                      children: [
-                                        SlidableAction(
-                                          onPressed: (value) async {
-                                            await WorkOutDbProvider.deleteData(
-                                                workOutList[index].id);
-                                            reBuild();
-                                          },
-                                          backgroundColor: Colors.red,
-                                          foregroundColor: Colors.white,
-                                          icon: Icons.delete,
-                                          label: '削除',
-                                        ),
-                                      ],
-                                    ),
-                                    child: SizedBox(
-                                      height: 90,
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              SizedBox(
-                                                  width: 80,
-                                                  height: 80,
-                                                  child: convertTypeToIcon(
-                                                      workOutList[index]
-                                                          .workOutType)),
-                                              const Gap(10),
-                                              Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    '${workOutList[index].calorie.toStringAsFixed(2)}kcal',
-                                                    maxLines: 1,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: const TextStyle(
-                                                        fontSize: 18,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  const Gap(5),
-                                                  Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 3),
-                                                      child: Text(
-                                                          convertDateFormat(
-                                                              workOutList[index]
-                                                                  .registryDate,
-                                                              'yyyy/MM/dd'),
-                                                          maxLines: 1,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          style: TextStyle(
-                                                            color: Colors
-                                                                .grey[500],
-                                                          ))),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    )));
-                          }))
+                  cardContent(workOutList)
                 ],
               ),
             ))
@@ -220,5 +143,87 @@ class _HealthPageState extends State<HealthPage> {
         ),
       ),
     ));
+  }
+
+  Widget cardContent(List<WorkOutView> workOutList) {
+    return Expanded(
+        child: ListView.builder(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            itemCount: workOutList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) =>
+                        WorkOutDetailPage(workOutId: workOutList[index].id),
+                  ));
+                },
+                child: Card(
+                    child: Slidable(
+                        endActionPane: ActionPane(
+                          extentRatio: 0.25,
+                          motion: const ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              onPressed: (value) async {
+                                await WorkOutDbProvider.deleteData(
+                                    workOutList[index].id);
+                                reBuild();
+                              },
+                              backgroundColor: Colors.red,
+                              foregroundColor: Colors.white,
+                              icon: Icons.delete,
+                              label: '削除',
+                            ),
+                          ],
+                        ),
+                        child: SizedBox(
+                          height: 90,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(
+                                      width: 80,
+                                      height: 80,
+                                      child: convertTypeToIcon(
+                                          workOutList[index].workOutType)),
+                                  const Gap(10),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        '${workOutList[index].calorie.toStringAsFixed(2)}kcal',
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const Gap(5),
+                                      Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 3),
+                                          child: Text(
+                                              convertDateFormat(
+                                                  workOutList[index]
+                                                      .registryDate,
+                                                  'yyyy/MM/dd'),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                color: Colors.grey[500],
+                                              ))),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ))),
+              );
+            }));
   }
 }
