@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:beer_collection/entities/beer.dart';
 import 'package:beer_collection/repository/beer/beer.dart';
+import 'package:beer_collection/util/app_styles.dart';
 import 'package:beer_collection/util/beer_style_list.dart';
 import 'package:beer_collection/util/get_week_date.dart';
 import 'package:beer_collection/util/validator.dart';
@@ -9,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:beer_collection/widgets/common_back_button_widget.dart';
 
 class BeerRecordAddPage extends StatefulWidget {
   const BeerRecordAddPage({Key? key}) : super(key: key);
@@ -59,7 +59,16 @@ class _BeerRecordAddPageState extends State<BeerRecordAddPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CommonBackButton(),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        leadingWidth: 80,
+        iconTheme: IconThemeData(color: Styles.primaryColor),
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.light, // for iOS
+          statusBarIconBrightness: Brightness.dark, // for Android
+        ),
+      ),
       body: Padding(
           padding: const EdgeInsets.only(right: 16.0, left: 16.0),
           child: SingleChildScrollView(

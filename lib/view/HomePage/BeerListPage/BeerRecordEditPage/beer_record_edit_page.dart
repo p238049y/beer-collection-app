@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:beer_collection/entities/beer.dart';
 import 'package:beer_collection/repository/beer/beer.dart';
+import 'package:beer_collection/util/app_styles.dart';
 import 'package:beer_collection/util/beer_style_list.dart';
 import 'package:beer_collection/util/get_week_date.dart';
 import 'package:beer_collection/util/validator.dart';
-import 'package:beer_collection/widgets/common_back_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
@@ -58,7 +58,16 @@ class _BeerRecordEditPageState extends State<BeerRecordEditPage> {
     _textEditingController.text = widget.beerData.registryDateTime;
 
     return Scaffold(
-      appBar: const CommonBackButton(),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        leadingWidth: 80,
+        iconTheme: IconThemeData(color: Styles.primaryColor),
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.light, // for iOS
+          statusBarIconBrightness: Brightness.dark, // for Android
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.only(right: 16.0, left: 16.0),
         child: SingleChildScrollView(

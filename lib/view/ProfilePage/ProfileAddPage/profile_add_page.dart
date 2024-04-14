@@ -1,8 +1,9 @@
 import 'package:beer_collection/entities/user.dart';
 import 'package:beer_collection/repository/user/user.dart';
+import 'package:beer_collection/util/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
-import 'package:beer_collection/widgets/common_back_button_widget.dart';
 
 class ProfileAddPage extends StatefulWidget {
   const ProfileAddPage({Key? key}) : super(key: key);
@@ -28,7 +29,16 @@ class _ProfileAddPageState extends State<ProfileAddPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CommonBackButton(),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        leadingWidth: 80,
+        iconTheme: IconThemeData(color: Styles.primaryColor),
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.light, // for iOS
+          statusBarIconBrightness: Brightness.dark, // for Android
+        ),
+      ),
       body: Padding(
           padding: const EdgeInsets.only(right: 16.0, left: 16.0),
           child: SingleChildScrollView(

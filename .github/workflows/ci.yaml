@@ -20,8 +20,9 @@ jobs:
       - name: CIジョブを動かすためのflutterの環境構築
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.0.2'
+          flutter-version: '3.19.0'
           channel: 'stable'
+          cache: true
 
       - name: 正常にインストールできているかを確認
         run: flutter --version
