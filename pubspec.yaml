@@ -35,11 +35,11 @@ dependencies:
   sqflite: ^2.0.2
 
   # スライドスクロールを使用するため
-  flutter_slidable: ^2.0.0
+  flutter_slidable: ^3.0.0
 
   # widget間に隙間を作るため
   get:
-  gap: ^2.0.0
+  gap: ^3.0.0
 
   # 画像ライブラリから画像を選択、もしくはカメラで新しい写真を撮るため
   image_picker: ^0.8.6
