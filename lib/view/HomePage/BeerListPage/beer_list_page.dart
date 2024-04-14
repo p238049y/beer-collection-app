@@ -2,9 +2,10 @@ import 'dart:io';
 
 import 'package:beer_collection/entities/beer.dart';
 import 'package:beer_collection/repository/beer/beer.dart';
+import 'package:beer_collection/util/app_styles.dart';
 import 'package:beer_collection/view/HomePage/BeerListPage/BeerRecordDetailPage/beer_record_detail_page.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:beer_collection/widgets/common_back_button_widget.dart';
 import 'package:flutter/material.dart';
 
 class BeerListPage extends StatefulWidget {
@@ -37,7 +38,16 @@ class _BeerListPageState extends State<BeerListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const CommonBackButton(),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          leadingWidth: 80,
+          iconTheme: IconThemeData(color: Styles.primaryColor),
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarBrightness: Brightness.light, // for iOS
+            statusBarIconBrightness: Brightness.dark, // for Android
+          ),
+        ),
         body: Scaffold(
             body: ListView.builder(
           // NOTE: https://qiita.com/code-cutlass/items/3a8b759056db1e8f7639
