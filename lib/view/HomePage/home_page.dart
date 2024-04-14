@@ -146,21 +146,15 @@ class _HomePageState extends State<HomePage> {
               ),
             );
           }),
-      floatingActionButton: Column(
-        verticalDirection: VerticalDirection.up, // childrenの先頭を下に配置
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          FloatingActionButton(
-            heroTag: 'beerRecordAdd',
-            backgroundColor: Colors.blue[500],
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const BeerRecordAddPage()));
-            },
-            child: const Icon(Icons.add),
-          ),
-        ],
-      ),
+      floatingActionButton: FloatingActionButton(
+          heroTag: 'beerRecordAdd',
+          backgroundColor: Colors.blue[500],
+          foregroundColor: Colors.white,
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const BeerRecordAddPage()));
+          },
+          child: const Icon(Icons.add)),
     );
   }
 }
