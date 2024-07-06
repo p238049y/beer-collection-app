@@ -1,0 +1,11 @@
+services:
+  flutterdevel:
+    container_name: beer-collection-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./volume:/volume
+    tty: true
+    ports:
+      - 18888:18888
