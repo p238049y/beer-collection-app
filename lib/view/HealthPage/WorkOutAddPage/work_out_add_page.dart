@@ -21,6 +21,12 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
   RequestWorkOut registryWorkOut = RequestWorkOut();
   RequestWorkOutValidate requestWorkOutValidate = RequestWorkOutValidate();
   final TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController _hourController =
+      TextEditingController(text: '00');
+  final TextEditingController _minuteController =
+      TextEditingController(text: '00');
+  final TextEditingController _secondController =
+      TextEditingController(text: '00');
 
   Future<void> initDb() async {
     await WorkOutDbProvider.setDb();
@@ -30,7 +36,36 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
   @override
   void initState() {
     super.initState();
+    _updateElapsedTime();
     initDb();
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    _hourController.dispose();
+    _minuteController.dispose();
+    _secondController.dispose();
+    super.dispose();
+  }
+
+  int _parseTimePart(String value) {
+    return int.tryParse(value) ?? 0;
+  }
+
+  double _parseDoubleOrZero(String value) {
+    return double.tryParse(value) ?? 0.0;
+  }
+
+  int _parseIntOrInvalid(String value) {
+    return int.tryParse(value) ?? -1;
+  }
+
+  void _updateElapsedTime() {
+    final hour = _parseTimePart(_hourController.text);
+    final minute = _parseTimePart(_minuteController.text);
+    final second = _parseTimePart(_secondController.text);
+    registryWorkOut.time = hour * 3600 + minute * 60 + second;
   }
 
   @override
@@ -117,7 +152,7 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
                     ),
                     onChanged: (String value) {
                       setState(() {
-                        registryWorkOut.load = double.parse(value);
+                        registryWorkOut.load = _parseDoubleOrZero(value);
                       });
                     },
                   ),
@@ -138,7 +173,7 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
                     ),
                     onChanged: (String value) {
                       setState(() {
-                        registryWorkOut.frequency = int.parse(value);
+                        registryWorkOut.frequency = _parseIntOrInvalid(value);
                       });
                     },
                   ),
@@ -152,21 +187,83 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
                   children: [
                     const Gap(16),
                     const LabelText(labelText: '時間を入力してください'),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        suffixIcon: Padding(
-                          padding: EdgeInsets.all(12.0),
-                          child: Text('秒'),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            controller: _hourController,
+                            keyboardType: TextInputType.number,
+                            textAlign: TextAlign.center,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(2),
+                            ],
+                            decoration: const InputDecoration(
+                              counterText: '',
+                              labelStyle: TextStyle(
+                                fontSize: 20,
+                              ),
+                            ),
+                            onChanged: (_) {
+                              setState(() {
+                                _updateElapsedTime();
+                              });
+                            },
+                          ),
                         ),
-                        labelStyle: TextStyle(
-                          fontSize: 20,
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(':', style: TextStyle(fontSize: 24)),
                         ),
-                      ),
-                      onChanged: (String value) {
-                        setState(() {
-                          registryWorkOut.time = int.parse(value);
-                        });
-                      },
+                        Expanded(
+                          child: TextFormField(
+                            controller: _minuteController,
+                            keyboardType: TextInputType.number,
+                            textAlign: TextAlign.center,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(2),
+                            ],
+                            decoration: const InputDecoration(
+                              counterText: '',
+                              labelStyle: TextStyle(
+                                fontSize: 20,
+                              ),
+                            ),
+                            onChanged: (_) {
+                              setState(() {
+                                _updateElapsedTime();
+                              });
+                            },
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(':', style: TextStyle(fontSize: 24)),
+                        ),
+                        Expanded(
+                          child: TextFormField(
+                            controller: _secondController,
+                            keyboardType: TextInputType.number,
+                            textAlign: TextAlign.center,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(2),
+                            ],
+                            decoration: const InputDecoration(
+                              counterText: '',
+                              labelStyle: TextStyle(
+                                fontSize: 20,
+                              ),
+                            ),
+                            onChanged: (_) {
+                              setState(() {
+                                _updateElapsedTime();
+                              });
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                     if (requestWorkOutValidate.isInValidTime)
                       const ErrorMessage(errorMessage: '時間が未入力です。時間を入力してください。'),
@@ -184,7 +281,7 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
                       ),
                       onChanged: (String value) {
                         setState(() {
-                          registryWorkOut.distance = double.parse(value);
+                          registryWorkOut.distance = _parseDoubleOrZero(value);
                         });
                       },
                     ),
@@ -212,7 +309,7 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
                       ),
                       onChanged: (String value) {
                         setState(() {
-                          registryWorkOut.calorie = double.parse(value);
+                          registryWorkOut.calorie = _parseDoubleOrZero(value);
                         });
                       },
                     ),

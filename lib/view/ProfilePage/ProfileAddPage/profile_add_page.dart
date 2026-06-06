@@ -114,6 +114,7 @@ class _ProfileAddPageState extends State<ProfileAddPage> {
                         icon: const Icon(Icons.add_task),
                         onPressed: () async {
                           await UserDbProvider.insertUserData(registryUser);
+                          if (!mounted) return;
                           Navigator.of(context).pop();
                         },
                         iconSize: 32.0,

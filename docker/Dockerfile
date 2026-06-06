@@ -1,4 +1,4 @@
-FROM dart:3.4-sdk
+FROM dart:3.12.1-sdk
 
 WORKDIR /workspace
 
@@ -6,7 +6,7 @@ RUN apt update && apt upgrade -y
 RUN apt install -y clang cmake ninja-build pkg-config libgtk-3-dev
 RUN dart pub global activate fvm
 
-ARG FLUTTER_VERSION=3.19.5
+ARG FLUTTER_VERSION=3.44.1
 ARG PATH=/root/.pub-cache/bin:$PATH
 RUN fvm doctor
 RUN fvm install ${FLUTTER_VERSION} && fvm use --force ${FLUTTER_VERSION}

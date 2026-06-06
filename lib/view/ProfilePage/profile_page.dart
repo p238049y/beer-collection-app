@@ -22,11 +22,6 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() {});
   }
 
-  Future<void> reBuild() async {
-    userDate = await UserDbProvider.getUserData();
-    setState(() {});
-  }
-
   @override
   void initState() {
     super.initState();
@@ -41,19 +36,21 @@ class _ProfilePageState extends State<ProfilePage> {
               ? [
                   IconButton(
                     icon: const Icon(Icons.add),
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
+                    onPressed: () async {
+                      await Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const ProfileAddPage()));
+                      await initDb();
                     },
                   ),
                 ]
               : [
                   IconButton(
                     icon: const Icon(Icons.create),
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
+                    onPressed: () async {
+                      await Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) =>
                               ProfileEditPage(userDate: userDate)));
+                      await initDb();
                     },
                   ),
                 ],
@@ -61,45 +58,36 @@ class _ProfilePageState extends State<ProfilePage> {
           backgroundColor: Colors.white,
           elevation: 0,
         ),
-        body: FutureBuilder(
-          future: reBuild(),
-          builder: (context, snapshot) {
-            return Scaffold(
-              body: Padding(
-                padding: const EdgeInsets.only(right: 16.0, left: 16.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                          width: 350,
-                          height: 250,
-                          child: Image.asset('assets/images/profile.png')),
-                      const Gap(16),
-                      ListItem(
-                          isEnabled: false,
-                          title: '名前',
-                          name: userDate.userName),
-                      const Gap(16),
-                      ListItem(
-                          isEnabled: false,
-                          title: '身長',
-                          name: userDate.height.toString(),
-                          unit: 'cm'),
-                      const Gap(16),
-                      ListItem(
-                          isEnabled: false,
-                          title: '体重',
-                          name: userDate.weight.toString(),
-                          unit: 'kg'),
-                      const Gap(8),
-                      const Text('(他のユーザーに公開されることは一切ありません)',
-                          style: TextStyle(fontWeight: FontWeight.bold))
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
+        body: Padding(
+          padding: const EdgeInsets.only(right: 16.0, left: 16.0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                    width: 350,
+                    height: 250,
+                    child: Image.asset('assets/images/profile.png')),
+                const Gap(16),
+                ListItem(
+                    isEnabled: false, title: '名前', name: userDate.userName),
+                const Gap(16),
+                ListItem(
+                    isEnabled: false,
+                    title: '身長',
+                    name: userDate.height.toString(),
+                    unit: 'cm'),
+                const Gap(16),
+                ListItem(
+                    isEnabled: false,
+                    title: '体重',
+                    name: userDate.weight.toString(),
+                    unit: 'kg'),
+                const Gap(8),
+                const Text('(他のユーザーに公開されることは一切ありません)',
+                    style: TextStyle(fontWeight: FontWeight.bold))
+              ],
+            ),
+          ),
         ));
   }
 }

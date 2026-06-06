@@ -21,8 +21,7 @@ class RequestWorkOutValidate {
         (registryWorkOut.load == null || registryWorkOut.load == 0.0);
     isInValidFrequency =
         (registryWorkOut.frequency == null || registryWorkOut.frequency == -1);
-    isInValidTime =
-        (registryWorkOut.time == null || registryWorkOut.time == -1);
+    isInValidTime = (registryWorkOut.time == null || registryWorkOut.time! <= 0);
     isInValidDistance =
         (registryWorkOut.distance == null || registryWorkOut.distance == 0.0);
     isInValidCalorie = (registryWorkOut.calorie < 1);
