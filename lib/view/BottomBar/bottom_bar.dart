@@ -12,9 +12,9 @@ class BottomBar extends StatefulWidget {
 }
 
 class _BottomBarState extends State<BottomBar> {
-  int selectedIndex = 0;
+  int _selectedIndex = 0;
 
-  static final List<Widget> widgetOptions = <Widget>[
+  static final List<Widget> _pages = <Widget>[
     const HomePage(),
     const HealthPage(),
     const ProfilePage(),
@@ -24,22 +24,20 @@ class _BottomBarState extends State<BottomBar> {
 
   void _onItemTapped(int index) {
     setState(() {
-      selectedIndex = index;
+      _selectedIndex = index;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: widgetOptions[selectedIndex],
-      ),
+      body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         iconSize: 32,
         selectedIconTheme: const IconThemeData(
           size: 40,
         ),
-        currentIndex: selectedIndex,
+        currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         elevation: 10,
         showSelectedLabels: false,
@@ -49,22 +47,26 @@ class _BottomBarState extends State<BottomBar> {
         unselectedItemColor: const Color(0xFF526480),
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(FluentIcons.home_24_regular),
-              activeIcon: Icon(FluentIcons.home_24_filled),
-              label: "Home"),
+            icon: Icon(FluentIcons.home_24_regular),
+            activeIcon: Icon(FluentIcons.home_24_filled),
+            label: 'Home',
+          ),
           BottomNavigationBarItem(
-              icon: Icon(FluentIcons.accessibility_24_regular),
-              activeIcon: Icon(FluentIcons.accessibility_24_filled),
-              label: "Health"),
+            icon: Icon(FluentIcons.accessibility_24_regular),
+            activeIcon: Icon(FluentIcons.accessibility_24_filled),
+            label: 'Health',
+          ),
           BottomNavigationBarItem(
-              icon: Icon(FluentIcons.person_24_regular),
-              activeIcon: Icon(FluentIcons.person_24_filled),
-              label: "Profile"),
+            icon: Icon(FluentIcons.person_24_regular),
+            activeIcon: Icon(FluentIcons.person_24_filled),
+            label: 'Profile',
+          ),
           // TODO: v1.1以降で実装
           // BottomNavigationBarItem(
           //     icon: Icon(FluentIcons.book_database_24_regular),
-          //     activeIcon: Icon(FluentIcons.book_database_24_filled),
-          //     label: "Learning"),
+          //   activeIcon: Icon(FluentIcons.book_database_24_filled),
+          //   label: 'Learning',
+          // ),
           // ),
         ],
       ),
