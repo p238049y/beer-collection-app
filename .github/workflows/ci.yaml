@@ -20,7 +20,7 @@ jobs:
       - name: CIジョブを動かすためのflutterの環境構築
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.0'
+          flutter-version: '3.44.1'
           channel: 'stable'
           cache: true
 
