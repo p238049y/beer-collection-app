@@ -53,6 +53,14 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
     return int.tryParse(value) ?? 0;
   }
 
+  double _parseDoubleOrZero(String value) {
+    return double.tryParse(value) ?? 0.0;
+  }
+
+  int _parseIntOrInvalid(String value) {
+    return int.tryParse(value) ?? -1;
+  }
+
   void _updateElapsedTime() {
     final hour = _parseTimePart(_hourController.text);
     final minute = _parseTimePart(_minuteController.text);
@@ -144,7 +152,7 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
                     ),
                     onChanged: (String value) {
                       setState(() {
-                        registryWorkOut.load = double.parse(value);
+                        registryWorkOut.load = _parseDoubleOrZero(value);
                       });
                     },
                   ),
@@ -165,7 +173,7 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
                     ),
                     onChanged: (String value) {
                       setState(() {
-                        registryWorkOut.frequency = int.parse(value);
+                        registryWorkOut.frequency = _parseIntOrInvalid(value);
                       });
                     },
                   ),
@@ -273,7 +281,7 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
                       ),
                       onChanged: (String value) {
                         setState(() {
-                          registryWorkOut.distance = double.parse(value);
+                          registryWorkOut.distance = _parseDoubleOrZero(value);
                         });
                       },
                     ),
@@ -301,7 +309,7 @@ class _WorkOutAddPageState extends State<WorkOutAddPage> {
                       ),
                       onChanged: (String value) {
                         setState(() {
-                          registryWorkOut.calorie = double.parse(value);
+                          registryWorkOut.calorie = _parseDoubleOrZero(value);
                         });
                       },
                     ),
