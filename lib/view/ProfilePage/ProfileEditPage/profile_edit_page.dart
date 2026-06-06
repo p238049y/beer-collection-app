@@ -107,6 +107,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                         icon: const Icon(Icons.add_task),
                         onPressed: () async {
                           await UserDbProvider.updateUserData(widget.userDate);
+                          if (!mounted) return;
                           Navigator.of(context).pop();
                         },
                         iconSize: 32.0,

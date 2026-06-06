@@ -25,19 +25,43 @@ class UserDbProvider {
     }
   }
 
+  static Future<Database> _requireDb() async {
+    return await setDb() ?? await initDb();
+  }
+
   static Future<void> insertUserData(RequestUser user) async {
-    await database!.insert(tableName, {
+    final db = await _requireDb();
+    final existingUsers = await db.query(tableName, limit: 1);
+
+    final data = {
       'user_name': user.userName,
       'height': user.height,
       'weight': user.weight,
-    });
+    };
+
+    if (existingUsers.isEmpty) {
+      await db.insert(tableName, data);
+      return;
+    }
+
+    await db.update(
+      tableName,
+      data,
+      where: 'id = ?',
+      whereArgs: [existingUsers.first['id']],
+    );
   }
 
   static Future<UserView> getUserData() async {
-    final List<Map<String, dynamic>> userMap = await database!.query(tableName);
+    final db = await _requireDb();
+    final List<Map<String, dynamic>> userMap = await db.query(
+      tableName,
+      orderBy: 'id DESC',
+      limit: 1,
+    );
 
     if (userMap.isEmpty) {
-      return UserView(-1, '', 0.0, 0.0);
+      return UserView(0, '未登録', 0.0, 0.0);
     } else {
       List<UserView> userList = List.generate(
           userMap.length,
@@ -52,7 +76,8 @@ class UserDbProvider {
   }
 
   static Future<void> updateUserData(UserView user) async {
-    await database!.update(
+    final db = await _requireDb();
+    await db.update(
         tableName,
         {
           'user_name': user.userName,
