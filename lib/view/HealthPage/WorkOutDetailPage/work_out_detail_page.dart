@@ -32,6 +32,19 @@ class _WorkOutDetailPageState extends State<WorkOutDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (workoutDetail.id == -1) {
+      return Scaffold(
+        appBar: AppBar(
+          iconTheme: const IconThemeData(color: Colors.blueGrey),
+          backgroundColor: Colors.white,
+          elevation: 0,
+        ),
+        body: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         actions: [
