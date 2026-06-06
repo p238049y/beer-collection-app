@@ -1,7 +1,7 @@
 import 'package:beer_collection/view/HealthPage/health_page.dart';
 import 'package:beer_collection/view/HomePage/home_page.dart';
 import 'package:beer_collection/view/ProfilePage/profile_page.dart';
-import 'package:fluentui_icons/fluentui_icons.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 
 class BottomBar extends StatefulWidget {
@@ -49,21 +49,21 @@ class _BottomBarState extends State<BottomBar> {
         unselectedItemColor: const Color(0xFF526480),
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(FluentSystemIcons.ic_fluent_home_regular),
-              activeIcon: Icon(FluentSystemIcons.ic_fluent_home_filled),
+              icon: Icon(FluentIcons.home_24_regular),
+              activeIcon: Icon(FluentIcons.home_24_filled),
               label: "Home"),
           BottomNavigationBarItem(
-              icon: Icon(FluentSystemIcons.ic_fluent_accessibility_regular),
-              activeIcon: Icon(FluentSystemIcons.ic_fluent_accessibility_filled),
+              icon: Icon(FluentIcons.accessibility_24_regular),
+              activeIcon: Icon(FluentIcons.accessibility_24_filled),
               label: "Health"),
           BottomNavigationBarItem(
-              icon: Icon(FluentSystemIcons.ic_fluent_person_regular),
-              activeIcon: Icon(FluentSystemIcons.ic_fluent_person_filled),
+              icon: Icon(FluentIcons.person_24_regular),
+              activeIcon: Icon(FluentIcons.person_24_filled),
               label: "Profile"),
           // TODO: v1.1以降で実装
           // BottomNavigationBarItem(
-          //     icon: Icon(FluentSystemIcons.ic_fluent_book_formula_database_regular),
-          //     activeIcon: Icon(FluentSystemIcons.ic_fluent_book_formula_database_filled),
+          //     icon: Icon(FluentIcons.book_database_24_regular),
+          //     activeIcon: Icon(FluentIcons.book_database_24_filled),
           //     label: "Learning"),
           // ),
         ],
