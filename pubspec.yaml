@@ -21,7 +21,7 @@ dependencies:
 
   # OSS (https://github.com/microsoft/fluentui-system-icons)
   # fluentuiのアイコンを使うため
-  fluentui_icons: 1.0.0
+  fluentui_icons: ^1.0.0
 
   # 選択ダイアログを出すため
   flutter_picker: 2.1.0
